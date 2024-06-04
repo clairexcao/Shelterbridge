@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
 import ChatbotScreen from './screens/ChatbotScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import ResourceList from './screens/ResourceList';
 import ResourceDetails from './screens/ResourceDetails';
@@ -37,7 +38,8 @@ function MapStackScreen() {
 
 function ChatbotStackScreen() {
   return (
-      <ProfileStack.Navigator>
+      <ProfileStack.Navigator initialRouteName="WelcomeScreen">
+        <ProfileStack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <ProfileStack.Screen name="ChatbotScreen" component={ChatbotScreen} />
         <ProfileStack.Screen name="SettingsScreen" component={SettingsScreen} />
       </ProfileStack.Navigator>
