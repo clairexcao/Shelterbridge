@@ -8,6 +8,8 @@ const ChatScreen = () => {
   const [showChat, setShowChat] = useState(true);
   const scrollViewRef = useRef();
 
+  //hello
+
   const sendMessage = () => {
     const newMessage = { id: messages.length, text: inputText, sender: 'user' };
     setMessages([...messages, newMessage]);
@@ -55,13 +57,13 @@ const ChatScreen = () => {
               placeholderTextColor="#ccc"
             />
             <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
-              <Icon name="send-circle" size={48} color="#B39BC8" />
+              <Icon name="send-circle" size={48} color="#8EBBDD" />
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
       ) : (
         <TouchableOpacity onPress={() => setShowChat(true)} style={styles.floatingButton}>
-          <Icon name="chat" size={48} color="#B39BC8" />
+          <Icon name="chat" size={48} color="#8EBBDD" />
         </TouchableOpacity>
       )}
     </View>
@@ -92,7 +94,7 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: 40,
     backgroundColor: 'white',
-    borderColor: '#B39BC8',
+    borderColor: '#8EBBDD',
     borderWidth: 1,
     borderRadius: 20,
     padding: 10,
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
   },
   userMessage: {
     alignSelf: 'flex-end',
-    backgroundColor: '#E1BEE7',
+    backgroundColor: '#8EBBDD',
     borderRadius: 25,
     marginVertical: 4,
     padding: 12,
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
   botMessage: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
-    backgroundColor: '#EDE7F6',
+    backgroundColor: '#CBE5F8',
     borderRadius: 29,
     marginVertical: 4,
     padding: 8,

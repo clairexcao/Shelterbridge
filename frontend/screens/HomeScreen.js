@@ -10,7 +10,7 @@ const HomeScreen = ({ navigation }) => {
     { name: 'Food', icon: 'food', api: 'Food' },
     { name: 'Shelter', icon: 'home-group', api: 'Shelter' },
     { name: 'Legal Assistance', icon: 'gavel', api: 'LegalAssistance' },
-    { name: 'Addiction Recovery', icon: 'emoticon-neutral-outline', api: 'AddictionRecovery' },
+    { name: 'Mental Health', icon: 'emoticon-neutral-outline', api: 'MentalHealth' },
     { name: 'Women and Children', icon: 'human-female-girl', api: 'WomenAndChildren' }
   ]);
 

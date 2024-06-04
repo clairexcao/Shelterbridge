@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { IconButton } from 'react-native-paper';
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
 import ChatbotScreen from './screens/ChatbotScreen';
@@ -19,17 +20,29 @@ const ProfileStack = createNativeStackNavigator();
 
 function HomeStackScreen() {
   return (
-      <HomeStack.Navigator>
-        <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
-        <HomeStack.Screen name="ResourceList" component={ResourceList} />
-        <HomeStack.Screen name="ResourceDetails" component={ResourceDetails} />
-      </HomeStack.Navigator>
+    <HomeStack.Navigator>
+      <HomeStack.Screen 
+        name="HomeScreen" 
+        component={HomeScreen} 
+        options={{ headerShown: false, headerTitle:'Home' }} 
+      />
+      <HomeStack.Screen 
+        name="ResourceList" 
+        component={ResourceList} 
+        options={{ headerTitle: 'Resources' }} 
+      />
+      <HomeStack.Screen 
+        name="ResourceDetails" 
+        component={ResourceDetails} 
+        options={{ headerTitle: 'Details' }} 
+      />
+    </HomeStack.Navigator>
   );
 }
 
 function MapStackScreen() {
   return (
-      <MapStack.Navigator>
+    <MapStack.Navigator screenOptions={{ headerShown: false }}>
         <MapStack.Screen name="MapScreen" component={MapScreen} />
         <MapStack.Screen name="ResourceDetails" component={ResourceDetails} />
       </MapStack.Navigator>
@@ -38,7 +51,7 @@ function MapStackScreen() {
 
 function ChatbotStackScreen() {
   return (
-      <ProfileStack.Navigator initialRouteName="WelcomeScreen">
+      <ProfileStack.Navigator initialRouteName="WelcomeScreen" screenOptions={{ headerShown: false }}>
         <ProfileStack.Screen name="WelcomeScreen" component={WelcomeScreen} />
         <ProfileStack.Screen name="ChatbotScreen" component={ChatbotScreen} />
         <ProfileStack.Screen name="SettingsScreen" component={SettingsScreen} />
