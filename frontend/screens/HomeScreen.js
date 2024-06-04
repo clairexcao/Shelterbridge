@@ -6,7 +6,13 @@ import styles from '../styles/HomeScreenStyles';
 import axios from 'axios';
 
 const HomeScreen = ({ navigation }) => {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([
+    { name: 'Food', icon: 'food', api: 'Food' },
+    { name: 'Shelter', icon: 'home-group', api: 'Shelter' },
+    { name: 'Legal Assistance', icon: 'gavel', api: 'LegalAssistance' },
+    { name: 'Addiction Recovery', icon: 'emoticon-neutral-outline', api: 'AddictionRecovery' },
+    { name: 'Women and Children', icon: 'human-female-girl', api: 'WomenAndChildren' }
+  ]);
 
   const fetchResources = async (category) => {
     try {

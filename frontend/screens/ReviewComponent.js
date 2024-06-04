@@ -6,18 +6,12 @@ const ReviewComponent = ({ onSubmit }) => {
   const [name, setName] = useState('');
   const [rating, setRating] = useState(3);
   const [review, setReview] = useState('');
-  const [date, setDate] = useState(new Date().toLocaleDateString());
 
   const handleSubmit = () => {
-    // pass the review data back to a parent component HERE MEOW
-    const reviewData = { name, rating, review, date };
-    onSubmit(reviewData);
-
-    // we reset fields after submission
+    onSubmit({ name, rating, review });
     setName('');
-    setRating(3);
+    setRating();
     setReview('');
-    setDate(new Date().toLocaleDateString());
   };
 
   return (
@@ -36,7 +30,6 @@ const ReviewComponent = ({ onSubmit }) => {
         startingValue={rating}
         onFinishRating={setRating}
       />
-      <Text>Date: {date}</Text>
       <TextInput
         placeholder="Your review"
         value={review}

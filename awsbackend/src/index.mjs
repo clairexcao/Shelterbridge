@@ -71,6 +71,28 @@ async function getCategory(event) {
     };
 }
 
+async function getReview(event) {
+
+    const command = new GetCommand({
+        TableName: "hldb-resource",
+        Key: {
+            id: event.pathParameters.id,
+        },
+    });
+
+    const response = await docClient.send(command);
+    console.log(response);
+    const item = response.Item;
+    let reviews = [];
+    if (item.reviews) {
+        reviews = JSON.parse(item.reviews);
+    }
+    return {
+        statusCode: 200,
+        body: JSON.stringify(reviews),
+    };
+}
+
 async function createReview(event) {
 
     let command = new GetCommand({
@@ -125,6 +147,8 @@ export const handler = async (event) => {
         return createResource(event);
     } else if (event.resource == '/resources/v1/{id}' && event.httpMethod == 'GET') {
         return getResource(event);
+    } else if (event.resource == '/reviews/v1/{id}' && event.httpMethod == 'GET') {
+        return getReview(event);
     } else if (event.resource == '/reviews/v1/{id}' && event.httpMethod == 'POST') {
         return createReview(event);
     } else {

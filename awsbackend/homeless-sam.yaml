@@ -58,6 +58,12 @@ Resources:
             RestApiId: !Ref ApiGateway
             Path: /resources/v1/{id}
             Method: get
+        GetReview:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /reviews/v1/{id}
+            Method: get
         CreateReview:
           Type: Api
           Properties:
