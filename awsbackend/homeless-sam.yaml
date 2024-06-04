@@ -1,0 +1,74 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: [AWS::Serverless-2016-10-31]
+Description: >
+  API backend
+
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+
+  ApiGateway:
+    Type: AWS::Serverless::Api
+    DependsOn: Lambda
+    Properties:
+      Name: !Sub ${AWS::StackName}-api
+      StageName: stage
+      MethodSettings:
+      - ResourcePath: /*
+        HttpMethod: '*'
+        MetricsEnabled: 'true'
+        DataTraceEnabled: 'false'
+        LoggingLevel: INFO
+
+  Lambda:
+    Type: AWS::Serverless::Function
+    DependsOn: LambdaRole
+    Properties:
+      AutoPublishAlias: release
+      InlineCode: |
+        export const handler = async (event) => {
+          const response = {
+              statusCode: 200,
+              body: JSON.stringify('Hello from Lambda!'),
+          };
+          return response;
+        };
+      Handler: index.handler
+      Role: !GetAtt LambdaRole.Arn
+      Events:
+        GetCategories:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /categories/v1
+            Method: get
+
+
+  LambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: Dynamodb_access
+          PolicyDocument:
+            Statement:
+              - Effect: Allow
+                Action:
+                  - dynamodb:*
+                Resource:
+                  - !Sub "arn:${AWS::Partition}:dynamodb:${AWS::Region}:${AWS::AccountId}:table/hldb*"
+      ManagedPolicyArns:
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/AmazonAPIGatewayInvokeFullAccess
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs
+
+
