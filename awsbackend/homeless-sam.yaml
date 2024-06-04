@@ -70,6 +70,12 @@ Resources:
             RestApiId: !Ref ApiGateway
             Path: /reviews/v1/{id}
             Method: post
+        CreateChat:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /chat/v1
+            Method: post
 
   LambdaRole:
     Type: AWS::IAM::Role

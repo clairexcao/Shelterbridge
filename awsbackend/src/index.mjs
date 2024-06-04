@@ -1,6 +1,7 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { GetCommand, PutCommand, ScanCommand, UpdateCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { v4 } from 'uuid';
+import axios from 'axios';
 
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
@@ -138,6 +139,46 @@ async function createReview(event) {
     };
 }
 
+async function createChat (event) {
+    try {
+        const request = JSON.parse(event.body);
+        console.log(request)
+        const res = await axios.post('https://api.openai.com/v1/chat/completions',
+          {
+            messages: [{
+              'role': 'user',
+              'content': request.input
+            }
+            ],
+            max_tokens: 150,
+            model: 'gpt-3.5-turbo',
+          },
+          {
+            headers: {
+              'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+              'Content-Type': 'application/json'
+            }
+          });
+          console.log(res.data.choices[0].message.content);
+          return {
+            statusCode: 200,
+            body: JSON.stringify({
+                message: res.data.choices[0].message.content
+            }),
+        };
+      } catch (error) {
+        console.error(error);
+        console.log('Error: Unable to fetch response');
+      }
+    return {
+        statusCode: 400,
+        body: JSON.stringify({
+            message: 'Error: Unable to fetch response'
+        }),
+    };
+
+}
+
 export const handler = async (event) => {
     let response;
     console.log(event)
@@ -151,10 +192,12 @@ export const handler = async (event) => {
         return getReview(event);
     } else if (event.resource == '/reviews/v1/{id}' && event.httpMethod == 'POST') {
         return createReview(event);
+    } else if (event.resource == '/chat/v1' && event.httpMethod == 'POST') {
+        return createChat(event);
     } else {
         response = {
             statusCode: 404,
-            body: JSON.stringify('Not Found'),
+            body: 'Not Found',
         };
     }
     return response;
