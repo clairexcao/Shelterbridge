@@ -13,10 +13,10 @@ const WelcomeScreen = () => {
       style={styles.container}
     ></LinearGradient> */}
       <Image
-        source={require('../data/chatbot.png')}
+        source={require('../data/chatbotTransparent.png')}
         style={styles.image}
       />
-      <Text style={styles.title}>Hi, I'm Chatbot!!</Text>
+      <Text style={styles.title}>Hi, I'm ShelterBot!!</Text>
       <Text style={styles.subtitle}>
         Click here to start chatting and I'll answer any questions you have!
       </Text>
@@ -40,9 +40,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#f7ebff'
   },
   image: {
-    width: 300,
-    height: 300,
-    marginBottom: 20
+    width: 200,
+    height: 305,
+    marginBottom: 20,
+    resizeMode: 'contain'
   },
   title: {
     fontSize: 24,

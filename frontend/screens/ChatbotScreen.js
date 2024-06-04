@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -6,6 +6,7 @@ const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState('');
   const [showChat, setShowChat] = useState(true);
+  const scrollViewRef = useRef();
 
   const sendMessage = () => {
     const newMessage = { id: messages.length, text: inputText, sender: 'user' };
@@ -15,7 +16,6 @@ const ChatScreen = () => {
   };
 
   const mockDialogflowResponse = (inputText) => {
-    // simulating just echo response for now
     const botResponse = { id: messages.length + 1, text: `Echo: ${inputText}`, sender: 'bot' };
     setMessages(messages => [...messages, botResponse]);
   };
@@ -25,14 +25,19 @@ const ChatScreen = () => {
       {showChat ? (
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 135 : 60}
           style={styles.chatContainer}
         >
-          <ScrollView style={styles.messageContainer}>
+          <ScrollView
+            ref={scrollViewRef}
+            style={styles.messageContainer}
+            onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
+          >
             {messages.map(msg => (
               <View key={msg.id} style={msg.sender === 'user' ? styles.userMessage : styles.botMessage}>
                 {msg.sender === 'bot' && (
                   <Image
-                    source={require('../data/chatbot.png')} 
+                    source={require('../data/chatbotTransparent.png')} 
                     style={styles.chatIcon}
                   />
                 )}
@@ -62,6 +67,7 @@ const ChatScreen = () => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -99,15 +105,15 @@ const styles = StyleSheet.create({
   userMessage: {
     alignSelf: 'flex-end',
     backgroundColor: '#E1BEE7',
-    borderRadius: 15,
+    borderRadius: 25,
     marginVertical: 4,
-    padding: 8,
+    padding: 12,
   },
   botMessage: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
     backgroundColor: '#EDE7F6',
-    borderRadius: 15,
+    borderRadius: 29,
     marginVertical: 4,
     padding: 8,
     alignItems: 'center',
@@ -116,9 +122,10 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   chatIcon: {
-    width: 24,
-    height: 24,
+    width: 30,
+    height: 30,
     marginRight: 8,
+    resizeMode: 'contain'
   },
   floatingButton: {
     marginBottom: 20,
