@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Image } from 'react-native';
+import { View, Text, TextInput, Button, ScrollView, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import axios from 'axios';
 
 const ChatScreen = () => {
   const [messages, setMessages] = useState([]);
@@ -8,19 +9,44 @@ const ChatScreen = () => {
   const [showChat, setShowChat] = useState(true);
   const scrollViewRef = useRef();
 
-  //hello
+  const handleSubmit = async () => {
+    console.log(inputText);
+    try {
+      const res = await axios.post('https://api.openai.com/v1/chat/completions',
+        {
+          messages: [{
+            'role': 'user',
+            'content': inputText
+          }
+          ],
+          max_tokens: 150,
+          model: 'gpt-3.5-turbo',
+        },
+        {
+          headers: {
+            'Authorization': `Bearer sk-proj-yMrN9RRMIMmQPcx3bGncT3BlbkFJ9XibTmysFVMtqfvkfgvI`,
+            'Content-Type': 'application/json'
+          }
+        });
+        sendBotMessage(res.data.choices[0].message.content);
+    } catch (error) {
+      console.error(error);
+      sendBotMessage('Error: Unable to fetch response');
+    }
+  };
 
   const sendMessage = () => {
     const newMessage = { id: messages.length, text: inputText, sender: 'user' };
     setMessages([...messages, newMessage]);
-    mockDialogflowResponse(inputText);
+    handleSubmit(inputText);
     setInputText('');
   };
 
-  const mockDialogflowResponse = (inputText) => {
-    const botResponse = { id: messages.length + 1, text: `Echo: ${inputText}`, sender: 'bot' };
+  const sendBotMessage = (input) => {
+    const botResponse = { id: messages.length, text: input, sender: 'bot' };
     setMessages(messages => [...messages, botResponse]);
   };
+
 
   return (
     <View style={styles.container}>
@@ -39,7 +65,7 @@ const ChatScreen = () => {
               <View key={msg.id} style={msg.sender === 'user' ? styles.userMessage : styles.botMessage}>
                 {msg.sender === 'bot' && (
                   <Image
-                    source={require('../data/chatbotTransparent.png')} 
+                    source={require('../data/chatbotTransparent.png')}
                     style={styles.chatIcon}
                   />
                 )}
@@ -57,13 +83,13 @@ const ChatScreen = () => {
               placeholderTextColor="#ccc"
             />
             <TouchableOpacity onPress={sendMessage} style={styles.sendButton}>
-              <Icon name="send-circle" size={48} color="#8EBBDD" />
+              <Icon name="send-circle" size={48} color="#b8a9c9" />
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
       ) : (
         <TouchableOpacity onPress={() => setShowChat(true)} style={styles.floatingButton}>
-          <Icon name="chat" size={48} color="#8EBBDD" />
+          <Icon name="chat" size={48} color="#b8a9c9" />
         </TouchableOpacity>
       )}
     </View>
@@ -94,7 +120,7 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: 40,
     backgroundColor: 'white',
-    borderColor: '#8EBBDD',
+    borderColor: '#b8a9c9',
     borderWidth: 1,
     borderRadius: 20,
     padding: 10,
@@ -106,7 +132,7 @@ const styles = StyleSheet.create({
   },
   userMessage: {
     alignSelf: 'flex-end',
-    backgroundColor: '#8EBBDD',
+    backgroundColor: '#b8a9c9',
     borderRadius: 25,
     marginVertical: 4,
     padding: 12,

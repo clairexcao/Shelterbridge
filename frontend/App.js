@@ -6,6 +6,7 @@ import { IconButton } from 'react-native-paper';
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
 import ChatbotScreen from './screens/ChatbotScreen';
+import ChatTestScreen from './screens/ChatTest';
 import WelcomeScreen from './screens/WelcomeScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import ResourceList from './screens/ResourceList';
