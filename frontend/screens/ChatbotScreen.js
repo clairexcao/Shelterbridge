@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 const ProfileScreen = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>ur profile</Text>
+            <Text style={styles.text}>CHATBOT MEOW</Text>
         </View>
     );
 };

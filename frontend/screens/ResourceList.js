@@ -1,7 +1,7 @@
 // ResourceList.js
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
-import styles from '../styles/ResourceListStyles';  // Ensure the path is correct
+import styles from '../styles/ResourceListStyles'; 
 
 const ResourceList = ({ route, navigation }) => {
   const { resources, title } = route.params;
@@ -21,5 +21,7 @@ const ResourceList = ({ route, navigation }) => {
     </ScrollView>
   );
 };
+
+//hi
 
 export default ResourceList;
