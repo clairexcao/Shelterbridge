@@ -20,11 +20,11 @@ const MapScreen = ({ navigation }) => {
 
   const fetchResources = async () => {
     try {
-      const requests = categories.map(category => 
+      const requests = categories.map(category =>
         axios.get(`https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/categories/v1/${category.api}`)
       );
       const responses = await Promise.all(requests);
-      const allResources = responses.flatMap(response => response.data); 
+      const allResources = responses.flatMap(response => response.data);
       setResources(allResources);
     } catch (error) {
       console.error('Failed to fetch resources:', error);
@@ -40,9 +40,9 @@ const MapScreen = ({ navigation }) => {
     switch (category) {
       case 'Food': return 'red';
       case 'Shelter': return '#2979FF';
-      case 'Legal Assistance': return '#C6FF00';
-      case 'Addiction Recovery': return 'pink'; 
-      case 'Women and Children': return 'purple'; 
+      case 'LegalAssistance': return 'green';
+      case 'MentalHealth': return 'pink';
+      case 'WomenAndChildren': return 'purple';
       default: return 'gray';
     }
   };
@@ -51,16 +51,16 @@ const MapScreen = ({ navigation }) => {
     navigation.navigate('ResourceDetails', { resource });
   };
 
-  const handleSelectedCategoriesChange = (id) => {
+  const handleSelectedCategoriesChange = (api) => {
     setSelectedCategories(prevSelected =>
-      prevSelected.includes(id)
-        ? prevSelected.filter(item => item !== id)
-        : [...prevSelected, id]
+      prevSelected.includes(api)
+        ? prevSelected.filter(item => item !== api)
+        : [...prevSelected, api]
     );
   };
 
-  const filteredResources = selectedCategories.length > 0 
-    ? resources.filter(resource => selectedCategories.includes(resource.category)) 
+  const filteredResources = selectedCategories.length > 0
+    ? resources.filter(resource => selectedCategories.includes(resource.category))
     : resources;
 
   const toggleModal = () => {
@@ -85,7 +85,7 @@ const MapScreen = ({ navigation }) => {
                 styles.categoryItem,
                 selectedCategories.includes(category.id) && styles.selectedCategoryItem
               ]}
-              onPress={() => handleSelectedCategoriesChange(category.id)}>
+              onPress={() => handleSelectedCategoriesChange(category.api)}>
               <Icon name={category.icon} size={30} color="#b8a9c9" />
               <Text style={styles.categoryText}>{category.name}</Text>
             </TouchableOpacity>
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height - 60, 
+    height: Dimensions.get('window').height - 60,
   },
 });
 
