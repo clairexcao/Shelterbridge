@@ -30,6 +30,7 @@ function MapStackScreen() {
   return (
       <MapStack.Navigator>
         <MapStack.Screen name="MapScreen" component={MapScreen} />
+        <MapStack.Screen name="ResourceDetails" component={ResourceDetails} />
       </MapStack.Navigator>
   );
 }
