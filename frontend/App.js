@@ -6,7 +6,6 @@ import { IconButton } from 'react-native-paper';
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
 import ChatbotScreen from './screens/ChatbotScreen';
-import ChatTestScreen from './screens/ChatTest';
 import WelcomeScreen from './screens/WelcomeScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import ResourceList from './screens/ResourceList';
@@ -22,20 +21,20 @@ const ProfileStack = createNativeStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen 
-        name="HomeScreen" 
-        component={HomeScreen} 
-        options={{ headerShown: false, headerTitle:'Home' }} 
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ headerShown: false, headerTitle:'Home' }}
       />
-      <HomeStack.Screen 
-        name="ResourceList" 
-        component={ResourceList} 
-        options={{ headerTitle: 'Resources' }} 
+      <HomeStack.Screen
+        name="ResourceList"
+        component={ResourceList}
+        options={{ headerTitle: 'Resources' }}
       />
-      <HomeStack.Screen 
-        name="ResourceDetails" 
-        component={ResourceDetails} 
-        options={{ headerTitle: 'Details' }} 
+      <HomeStack.Screen
+        name="ResourceDetails"
+        component={ResourceDetails}
+        options={{ headerTitle: 'Details' }}
       />
     </HomeStack.Navigator>
   );
@@ -72,7 +71,7 @@ function App() {
         </NavigationContainer>
       </Provider>
   );
-  
+
 }
 
 export default App;
