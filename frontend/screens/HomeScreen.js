@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const HomeScreen = ({ navigation }) => {
   const [categories, setCategories] = useState([
+    {name: 'Hotlines', icon: 'phone', api: 'Hotline'},
     { name: 'Food', icon: 'food', api: 'Food' },
     { name: 'Shelter', icon: 'home-group', api: 'Shelter' },
     { name: 'Legal Assistance', icon: 'gavel', api: 'LegalAssistance' },
