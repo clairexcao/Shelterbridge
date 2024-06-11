@@ -8,16 +8,26 @@ const ResourceList = ({ route, navigation }) => {
   return (
     <ScrollView style={styles.container}>
       {/* <Text style={styles.title}>{title}</Text>  */}
-      {resources.map((resource, index) => (
-        <TouchableOpacity
+      {resources.map((resource, index) => {
+        let info = resource.phoneNumber;
+        if(resource.category == "Hotline") {
+          info = resource.phoneNumber;
+        }
+        else {
+          info = resource.description;
+        }
+        
+
+        return ( <TouchableOpacity
           key={index}
           style={styles.resourceItem}
           onPress={() => navigation.navigate('ResourceDetails', { resource })}
         >
           <Text style={styles.resourceTitle}>{resource.name}</Text> 
-          <Text style={styles.resourceDescription}>{resource.description}</Text> 
+          <Text style={styles.resourceDescription}>{info}</Text> 
         </TouchableOpacity>
-      ))}
+        );
+      })}
     </ScrollView>
   );
 };
