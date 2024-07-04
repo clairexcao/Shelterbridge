@@ -12,11 +12,11 @@ const ChatScreen = () => {
     const handleSubmit = async () => {
         console.log(inputText);
         try {
-            const res = await axios.post('https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/chat/v1',
+            const res = await axios.post('http://34.83.105.250:6000/chat',
                 {
-                    input: inputText
+                    question: inputText
                 });
-            console.log(res.data.message);
+            console.log(res.data);
             sendBotMessage(res.data.message);
         } catch (error) {
             console.error(error);

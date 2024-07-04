@@ -16,7 +16,22 @@ const ResourceList = ({ route, navigation }) => {
         else {
           info = resource.description;
         }
+
+        let capacity = resource.capacity;
+        if(capacity == undefined) {
+          capacity = "N/A"
+        }
+        let available = resource.available;
+        if(available == undefined) {
+          available = "N/A"
+        }
         
+        let availableStyle = styles.resourceDescription;
+        if (available > 0) {
+           availableStyle = styles.resourceAvailable;
+        } else if (available == 0) {
+          availableStyle = styles.resourceUnavailable;
+        } 
 
         return ( <TouchableOpacity
           key={index}
@@ -25,6 +40,10 @@ const ResourceList = ({ route, navigation }) => {
         >
           <Text style={styles.resourceTitle}>{resource.name}</Text> 
           <Text style={styles.resourceDescription}>{info}</Text> 
+          <Text style={styles.resourceDescription}>Capacity: {capacity}</Text> 
+          <Text style={availableStyle}>Available: {available}</Text> 
+
+          
         </TouchableOpacity>
         );
       })}

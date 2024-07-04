@@ -26,6 +26,15 @@ const styles = StyleSheet.create({
   resourceDescription: {
     fontSize: 14,
     color: '#fff'
+  },
+
+  resourceAvailable: {
+    fontSize: 16,
+    color: '#90EE90'
+  },
+  resourceUnavailable: {
+    fontSize: 16,
+    color: '#ff0000'
   }
 });
 
