@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { IconButton } from 'react-native-paper';
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
+import CityScreen from './screens/CityScreen';
 import ChatbotScreen from './screens/ChatbotScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import SettingsScreen from './screens/SettingsScreen';
@@ -59,6 +60,18 @@ function ChatbotStackScreen() {
   );
 }
 
+function CityStackScreen() {
+    return (
+        <ProfileStack.Navigator screenOptions={{ headerShown: false }}>
+          {/* <ProfileStack.Screen name="WelcomeScreen" component={WelcomeScreen} /> */}
+          <ProfileStack.Screen name="CityScreen" component={CityScreen} />
+        </ProfileStack.Navigator>
+    );
+  }
+
+
+
+
 function App() {
   return (
       <Provider store={store}>
@@ -67,6 +80,7 @@ function App() {
             <Tab.Screen name="Home" component={HomeStackScreen} />
             <Tab.Screen name="Map" component={MapStackScreen} />
             <Tab.Screen name="Chatbot" component={ChatbotStackScreen} />
+            <Tab.Screen name="Cities" component={CityStackScreen} />
           </Tab.Navigator>
         </NavigationContainer>
       </Provider>

@@ -40,10 +40,8 @@ const ResourceList = ({ route, navigation }) => {
         >
           <Text style={styles.resourceTitle}>{resource.name}</Text>
           <Text style={styles.resourceDescription}>{info}</Text>
-          <Text style={styles.resourceDescription}>Capacity: {capacity}</Text>
-          <Text style={availableStyle}>Available: {available}</Text>
-
-
+          {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Capacity: {capacity}</Text>) : null}
+          {resource.category == 'Shelter' ? (<Text style={availableStyle}>Available: {available}</Text>) : null}
         </TouchableOpacity>
         );
       })}

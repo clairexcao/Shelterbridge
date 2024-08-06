@@ -17,7 +17,7 @@ const ResourceDetails = ({ route }) => {
                     'Content-Type': 'application/json',
                 }
             });
-            console.log("Received response:", response);
+            // console.log("Received response:", response);
             setReviews(response.data);
         } catch (error) {
             console.error("Failed to fetch reviews:", error);

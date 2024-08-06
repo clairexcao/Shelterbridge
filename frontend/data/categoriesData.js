@@ -11,7 +11,7 @@ export const categories = [
         eligibility: 'Open to all who need assistance.',
         hours: 'Breakfast: 6:30 am - 7:30 am, Lunch: Noon - 1 pm, Dinner: 5 pm - 6 pm',
         email: 'info@blanchethouse.org',
-        phoneNumber: '(503) 241-4340',
+        phone: '(503) 241-4340',
         directions: 'Located near the Burnside Bridge in downtown Portland.',
         website: 'https://blanchethouse.org',
         },
