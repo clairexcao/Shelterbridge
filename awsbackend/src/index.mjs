@@ -5,14 +5,14 @@ import axios from 'axios';
 
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
-
+const resourceTableName = 'shelter-bridge-db';
 
 async function createResource(event) {
     const body = JSON.parse(event.body);
     console.log(body);
     body.id = v4();
     const command = new PutCommand({
-        TableName: "hldb-resource",
+        TableName: resourceTableName,
         Item: body
     });
 
@@ -26,7 +26,7 @@ async function createResource(event) {
 
 async function getResource(event) {
     const command = new GetCommand({
-        TableName: "hldb-resource",
+        TableName: resourceTableName,
         Key: {
             id: event.pathParameters.id,
         },
@@ -49,7 +49,7 @@ async function getResource(event) {
 async function getCategory(event) {
 
     const command = new ScanCommand({
-        TableName: "hldb-resource"
+        TableName: resourceTableName,
     });
 
     const response = await docClient.send(command);
@@ -72,10 +72,37 @@ async function getCategory(event) {
     };
 }
 
+async function getCategoryInCity(event) {
+
+    const command = new ScanCommand({
+        TableName: resourceTableName,
+    });
+
+
+    const response = await docClient.send(command);
+    let result = [];
+    for (const item of response.Items) {
+        console.log(JSON.stringify(item));
+        if ((item.category == event.pathParameters.category) && (item.city == event.queryStringParameters.cityname)) {
+            if (item.reviews) {
+                item.reviews = JSON.parse(item.reviews);
+            } else {
+                item.reviews = [];
+            }
+            result.push(item);
+        }
+    }
+    console.log(JSON.stringify(result));
+    return {
+        statusCode: 200,
+        body: JSON.stringify(result),
+    };
+}
+
 async function getReview(event) {
 
     const command = new GetCommand({
-        TableName: "hldb-resource",
+        TableName: resourceTableName,
         Key: {
             id: event.pathParameters.id,
         },
@@ -97,7 +124,7 @@ async function getReview(event) {
 async function createReview(event) {
 
     let command = new GetCommand({
-        TableName: "hldb-resource",
+        TableName: resourceTableName,
         Key: {
             id: event.pathParameters.id,
         },
@@ -120,7 +147,7 @@ async function createReview(event) {
     resource.reviews = reviews;
 
     const udpateCommand = new UpdateCommand({
-        TableName: "hldb-resource",
+        TableName: resourceTableName,
         Key: {
             id: resource.id,
         },
@@ -194,7 +221,10 @@ export const handler = async (event) => {
         return createReview(event);
     } else if (event.resource == '/chat/v1' && event.httpMethod == 'POST') {
         return createChat(event);
-    } else {
+    } else if (event.resource == '/categories/v2/{category}' && event.httpMethod == 'GET') {
+        return getCategoryInCity(event);
+    }
+    else {
         response = {
             statusCode: 404,
             body: 'Not Found',
