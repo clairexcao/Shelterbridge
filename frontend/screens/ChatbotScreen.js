@@ -12,9 +12,19 @@ const ChatScreen = () => {
     const handleSubmit = async () => {
         console.log(inputText);
         try {
-            const res = await axios.post('http://34.83.105.250:6000/chat',
+            // PSU server
+            // const res = await axios.post('http://34.83.105.250:6000/chat',
+            //     {
+            //         question: inputText
+            //     });
+            const res = await axios.post('https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/chat/v1',
                 {
-                    question: inputText
+                    input: inputText
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
                 });
             console.log(res.data);
             sendBotMessage(res.data.message);
