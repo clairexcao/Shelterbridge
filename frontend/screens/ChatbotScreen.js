@@ -12,22 +12,24 @@ const ChatScreen = () => {
     const handleSubmit = async () => {
         console.log(inputText);
         try {
-            // PSU server
-            // const res = await axios.post('http://34.83.105.250:6000/chat',
+            // claire's amazing RAG application
+            const res = await axios.post('http://34.82.51.95:6000/chat',
+                {
+                    question: inputText
+                 });
+            console.log(res.data.output);
+            sendBotMessage(res.data.output);
+            // const res = await axios.post('https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/chat/v1',
             //     {
-            //         question: inputText
+            //         input: inputText
+            //     },
+            //     {
+            //         headers: {
+            //             'Content-Type': 'application/json',
+            //         }
             //     });
-            const res = await axios.post('https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/chat/v1',
-                {
-                    input: inputText
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                });
-            console.log(res.data);
-            sendBotMessage(res.data.message);
+            // console.log(res.data);
+            // sendBotMessage(res.data.message);
         } catch (error) {
             console.error(error);
             sendBotMessage('Error: Unable to fetch response');
