@@ -166,37 +166,37 @@ async function createReview(event) {
     };
 }
 
-async function createChat (event) {
+async function createChat(event) {
     try {
         const request = JSON.parse(event.body);
         console.log(request)
         const res = await axios.post('https://api.openai.com/v1/chat/completions',
-          {
-            messages: [{
-              'role': 'user',
-              'content': request.input
-            }
-            ],
-            max_tokens: 150,
-            model: 'gpt-3.5-turbo',
-          },
-          {
-            headers: {
-              'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-              'Content-Type': 'application/json'
-            }
-          });
-          console.log(res.data.choices[0].message.content);
-          return {
+            {
+                messages: [{
+                    'role': 'user',
+                    'content': request.input
+                }
+                ],
+                max_tokens: 150,
+                model: 'gpt-3.5-turbo',
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+        console.log(res.data.choices[0].message.content);
+        return {
             statusCode: 200,
             body: JSON.stringify({
                 message: res.data.choices[0].message.content
             }),
         };
-      } catch (error) {
+    } catch (error) {
         console.error(error);
         console.log('Error: Unable to fetch response');
-      }
+    }
     return {
         statusCode: 400,
         body: JSON.stringify({
@@ -204,6 +204,64 @@ async function createChat (event) {
         }),
     };
 
+}
+
+async function getAvailableBeds(event) {
+
+    const command = new GetCommand({
+        TableName: resourceTableName,
+        Key: {
+            id: event.pathParameters.id,
+        },
+    });
+
+    const response = await docClient.send(command);
+    console.log(response);
+    const item = response.Item;
+    const beds = item.available ? item.available : 0;
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ id: item.id, available: beds })
+    };
+}
+
+async function setAvailableBeds(event) {
+
+    let command = new GetCommand({
+        TableName: resourceTableName,
+        Key: {
+            id: event.pathParameters.id,
+        },
+    });
+    let response = await docClient.send(command);
+    console.log(response);
+    if (response.$metadata.httpStatusCode != 200) {
+        return {
+            statusCode: resource.$metadata.httpStatusCode,
+            body: JSON.stringify({ "error": "Resource not found" }),
+        };
+    }
+    let resource = response.Item;
+    const available = JSON.parse(event.body).available;
+
+    const udpateCommand = new UpdateCommand({
+        TableName: resourceTableName,
+        Key: {
+            id: resource.id,
+        },
+        UpdateExpression: "set available = :available",
+        ExpressionAttributeValues: {
+            ":available": available,
+        },
+        ReturnValues: "ALL_NEW",
+    });
+
+    response = await docClient.send(udpateCommand);
+    console.log(response);
+    return {
+        statusCode: 200,
+        body: JSON.stringify({ available: available }),
+    };
 }
 
 export const handler = async (event) => {
@@ -223,6 +281,10 @@ export const handler = async (event) => {
         return createChat(event);
     } else if (event.resource == '/categories/v2/{category}' && event.httpMethod == 'GET') {
         return getCategoryInCity(event);
+    } else if (event.resource == '/shelter/available/v1/{id}' && event.httpMethod == 'GET') {
+        return getAvailableBeds(event);
+    } else if (event.resource == '/shelter/available/v1/{id}' && event.httpMethod == 'POST') {
+        return setAvailableBeds(event);
     }
     else {
         response = {

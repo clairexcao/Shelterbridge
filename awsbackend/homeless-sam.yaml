@@ -76,6 +76,18 @@ Resources:
             RestApiId: !Ref ApiGateway
             Path: /chat/v1
             Method: post
+        GetShelterAvailability:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /shelter/available/v1/{id}
+            Method: get
+        SetShelterAvailability:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /shelter/available/v1/{id}
+            Method: post
 
   LambdaRole:
     Type: AWS::IAM::Role
