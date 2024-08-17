@@ -13,23 +13,23 @@ const ChatScreen = () => {
         console.log(inputText);
         try {
             // claire's amazing RAG application
-            const res = await axios.post('http://34.82.51.95:6000/chat',
+            // const res = await axios.post('http://34.82.51.95:6000/chat',
+            //     {
+            //         question: inputText
+            //      });
+            // console.log(res.data.output);
+            // sendBotMessage(res.data.output);
+            const res = await axios.post('https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/chat/v1',
                 {
-                    question: inputText
-                 });
-            console.log(res.data.output);
-            sendBotMessage(res.data.output);
-            // const res = await axios.post('https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/chat/v1',
-            //     {
-            //         input: inputText
-            //     },
-            //     {
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //         }
-            //     });
-            // console.log(res.data);
-            // sendBotMessage(res.data.message);
+                    input: inputText
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+            console.log(res.data);
+            sendBotMessage(res.data.message);
         } catch (error) {
             console.error(error);
             sendBotMessage('Error: Unable to fetch response');
