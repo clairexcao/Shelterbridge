@@ -46,6 +46,12 @@ Resources:
             RestApiId: !Ref ApiGateway
             Path: /categories/v1/{category}
             Method: get
+        GetCategoryV2:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ApiGateway
+            Path: /categories/v2/{category}
+            Method: get
         CreateResource:
           Type: Api
           Properties:
