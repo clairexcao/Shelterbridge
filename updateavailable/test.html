@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TPI - Shelter Available Beds Update Page</title>
+</head>
+
+<body onload="initializeTable()"></body>
+<h3>Update TPI Available beds</h3>
+<label>Available Beds:</label>
+<p></p>
+<table>
+    <tr>
+        <th>Shelter Location</th>
+        <th> Available Beds </th>
+    </tr>
+    <tr>
+        <td>Willamette Center</td>
+        <td id="59678093-2bd3-451f-8a40-0aa6ce003da2">0</td>
+    </tr>
+    <tr>
+        <td>River District Navigation Center</td>
+        <td id="8dc6426f-a2d4-4cbd-a420-88835528f87f">0</td>
+    </tr>
+    <tr>
+        <td>Jean's Place</td>
+        <td id="883fb326-3cb1-4941-9ebb-ac792349d054">0</td>
+    </tr>
+    <tr>
+        <td>Banfield Shelter Motel</td>
+        <td id="1e4e5e20-aece-41e3-b444-bb3f19a73c93">0</td>
+    </tr>
+    <tr>
+        <td>Walnut Park Shelter</td>
+        <td id="d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa">0</td>
+    </tr>
+</table>
+<p></p>
+<label for="location">Select a shelter location:</label>
+<select id="location" name="location" onchange="clearBedsInput()">
+    <option value="59678093-2bd3-451f-8a40-0aa6ce003da2">Willamette Center</option>
+    <option value="8dc6426f-a2d4-4cbd-a420-88835528f87f">River District Navigation Center</option>
+    <option value="883fb326-3cb1-4941-9ebb-ac792349d054">Jean's Place</option>
+    <option value="1e4e5e20-aece-41e3-b444-bb3f19a73c93">Banfield Shelter Motel</option>
+    <option value="d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa">Walnut Park Shelter</option>
+</select>
+<p></p>
+<p></p>
+<label for="available">Please update available beds:</label>
+<input type="text" id="available" name="available" placeholder="Enter available beds">
+<button type="submit" onclick="setBeds()">Submit</button>
+<script>
+    async function initializeTable() {
+        const beds1 = await getbeds('59678093-2bd3-451f-8a40-0aa6ce003da2');
+        const beds2 = await getbeds('8dc6426f-a2d4-4cbd-a420-88835528f87f');
+        const beds3 = await getbeds('883fb326-3cb1-4941-9ebb-ac792349d054');
+        const beds4 = await getbeds('1e4e5e20-aece-41e3-b444-bb3f19a73c93');
+        const beds5 = await getbeds('d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa');
+
+        document.getElementById("59678093-2bd3-451f-8a40-0aa6ce003da2").innerText = beds1;
+        document.getElementById("8dc6426f-a2d4-4cbd-a420-88835528f87f").innerText = beds2;
+        document.getElementById("883fb326-3cb1-4941-9ebb-ac792349d054").innerText = beds3;
+        document.getElementById("1e4e5e20-aece-41e3-b444-bb3f19a73c93").innerText = beds4;
+        document.getElementById("d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa").innerText = beds5;
+
+        clearBedsInput();
+    }
+    async function clearBedsInput() {
+        const selectedLocation = document.getElementById("location").value;
+        document.getElementById("available").value = document.getElementById(selectedLocation).innerText;
+    }
+    async function getbeds(location) {
+        const url = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/' + location;
+        const response = await fetch(url, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        return data.available;
+    }
+    function setBeds() {
+        const selectedLocation = document.getElementById("location").value;
+        var value = document.getElementById("available").value;
+        const url = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/' + selectedLocation;
+        return fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ available: value })
+        })
+            .then(response => {
+                // Handle the response here
+                if (!response.ok) {
+                    throw new Error('Request failed');
+                }
+                document.getElementById(selectedLocation).innerText = value;
+                return response.json();
+            })
+            .then(data => {
+                // Handle the response data here
+                return data;
+            })
+            .catch(error => {
+                // Handle any errors here
+                console.error(error);
+            });
+    }
+</script>
+</body>
+
+</html>

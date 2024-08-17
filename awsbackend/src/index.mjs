@@ -221,6 +221,9 @@ async function getAvailableBeds(event) {
     const beds = item.available ? item.available : 0;
     return {
         statusCode: 200,
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
         body: JSON.stringify({ id: item.id, available: beds })
     };
 }
@@ -260,6 +263,9 @@ async function setAvailableBeds(event) {
     console.log(response);
     return {
         statusCode: 200,
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
         body: JSON.stringify({ available: available }),
     };
 }
