@@ -15,7 +15,6 @@ const ResourceList = ({ route, navigation }) => {
         <ScrollView style={styles.container}>
             {/* <Text style={styles.title}>{title}</Text>  */}
             {filteredResources.map((resource, index) => {
-                console.log(resource.capacity);
                 let info = resource.description;
                 if (resource.category == 'Hotline') {
                     info = resource.phone;
