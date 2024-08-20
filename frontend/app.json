@@ -1,10 +1,18 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "ShelterBridge",
+    "slug": "ShelterBridge",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "66bc4a43-20e6-4175-8059-59f9fb2d15f6"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.shelterbridge.iosapp"
+    }
   }
 }
