@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = ({ navigation }) => {
     const [categories, setCategories] = useState([
+        { name: 'Available Beds', icon: 'bed', api: 'Shelter' },
         { name: 'Hotlines', icon: 'phone', api: 'Hotline' },
         { name: 'Food', icon: 'food', api: 'Food' },
         { name: 'Shelter', icon: 'home-group', api: 'Shelter' },
