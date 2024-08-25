@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button, ScrollView, TouchableOpacity, StyleSheet
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/HomeScreenStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import config from '../config.js';
 
 const cities = [
     { name: 'Portland, OR', icon: 'city' },
@@ -35,8 +36,6 @@ _storeData = async (key, cityname) => {
     }
 };
 
-
-
 const CityScreen = () => {
 
     const [selectedButton, setSelectedButton] = useState(null);
@@ -50,6 +49,7 @@ const CityScreen = () => {
                 if (selectedCity) {
                     setSelectedButton(cities.indexOf(selectedCity));
                 }
+
             }
         };
         setCurrentCity();
@@ -58,6 +58,8 @@ const CityScreen = () => {
     const handlePress = async (index, city) => {
         setSelectedButton(index);
         _storeData('cityname', city.name);
+        config.city = city.name;
+        console.log('current city set to', config.city);
     };
 
     return (
