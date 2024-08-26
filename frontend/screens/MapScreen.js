@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps';
 import axios from 'axios';
 import Modal from 'react-native-modal';
@@ -39,8 +40,8 @@ const MapScreen = ({ navigation }) => {
         }
     };
 
-    useEffect(() => {
-        console.log('here', config.city);
+    setCurrentRegion = (() => {
+        console.log('map config city', config.city);
         if (config.city === 'Portland, OR') {
             setRegion({
                 latitude: 45.5231,
@@ -55,6 +56,20 @@ const MapScreen = ({ navigation }) => {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
             });
+        } else if (config.city === 'Seattle, WA') {
+            setRegion({
+                latitude: 47.6061,
+                longitude: -122.3328,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            });
+        } else if (config.city === 'Los Angeles, CA') {
+            setRegion({
+                latitude: 34.0549,
+                longitude: -118.2426,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            });
         } else {
             setRegion({
                 latitude: 45.5231,
@@ -63,6 +78,9 @@ const MapScreen = ({ navigation }) => {
                 longitudeDelta: 0.0421,
             });
         }
+    });
+
+    useEffect(() => {
         fetchResources();
     }, []);
 
@@ -94,7 +112,7 @@ const MapScreen = ({ navigation }) => {
         : resources;
 
     const toggleModal = () => {
-        console.log('toggle');
+        setCurrentRegion();
         setModalVisible(!isModalVisible);
     };
 
@@ -117,8 +135,8 @@ const MapScreen = ({ navigation }) => {
             return {
                 latitude: 45.5231,
                 longitude: -122.6765,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitudeDelta: 0.1522,
+                longitudeDelta: 0.0721,
             };
         }
     }
@@ -153,7 +171,8 @@ const MapScreen = ({ navigation }) => {
             </Modal>
             <MapView
                 style={styles.map}
-                initialRegion={region}>
+                initialRegion={region}
+                region={region}>
                 {filteredResources.map(resource => (
                     <Marker
                         key={resource.id}
