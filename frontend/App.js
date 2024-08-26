@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -71,19 +71,31 @@ function CityStackScreen() {
     );
 }
 
-
-_retrieveData = async (key) => {
-    try {
-        const value = await AsyncStorage.getItem(key);
-        if (value !== null) {
-            return value;
-        }
-    } catch (error) {
-        // Error retrieving data
-        console.log(error)
-    }
-};
 function App() {
+
+    _retrieveData = async (key) => {
+        try {
+            const value = await AsyncStorage.getItem(key);
+            if (value !== null) {
+                return value;
+            }
+        } catch (error) {
+            // Error retrieving data
+            console.log(error)
+        }
+    };
+
+    const [currentCity, setCurrentCity] = useState(null);
+
+    useEffect(() => {
+        const getCurrentCity = async () => {
+            const cityname = await _retrieveData('cityname');
+            console.log('current city', cityname);
+            config.city = cityname;
+            setCurrentCity(cityname);
+        };
+        getCurrentCity();
+    }, []);
 
     return (
         <Provider store={store}>

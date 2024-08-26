@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/HomeScreenStyles';
-//import { categories } from '../data/categoriesData';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
