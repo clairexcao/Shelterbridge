@@ -47,7 +47,10 @@ function MapStackScreen() {
     return (
         <MapStack.Navigator screenOptions={{ headerShown: false }}>
             <MapStack.Screen name="MapScreen" component={MapScreen} />
-            <MapStack.Screen name="ResourceDetails" component={ResourceDetails} />
+            <MapStack.Screen
+                name="ResourceDetails"
+                component={ResourceDetails}
+                options={{ headerShown: true, headerTitle: 'Details' }} />
         </MapStack.Navigator>
     );
 }
