@@ -64,6 +64,7 @@ const CityScreen = () => {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.title}> Please Select Your City</Text>
             {cities.map((city, index) => {
                 return (
                     <TouchableOpacity
@@ -71,8 +72,8 @@ const CityScreen = () => {
                         style={selectedButton === index ? styles.button : styles.button}
                         onPress={() => handlePress(index, city)}
                     >
-                        <Icon name={selectedButton === index ? 'home' : city.icon} size={30} color="#fff" />
-                        <Text style={selectedButton === index ? styles.buttonText : styles.buttonText}>{city.name}</Text>
+                        <Icon name={selectedButton === index ? 'home' : city.icon} size={30} color={selectedButton === index ? "black" : "#fff"} />
+                        <Text style={selectedButton === index ? styles.currentCityButtonText : styles.buttonText}>{city.name}</Text>
                     </TouchableOpacity>
                 );
             })

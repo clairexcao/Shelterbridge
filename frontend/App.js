@@ -109,7 +109,7 @@ function App() {
                     }} />
                     <Tab.Screen name="Map" component={MapStackScreen} options={{ headerTitle: 'ShelterBridge Map' }} />
                     <Tab.Screen name="Chatbot" component={ChatbotStackScreen} options={{ headerTitle: 'ShelterBridge ChatBot' }} />
-                    <Tab.Screen name="Cities" component={CityStackScreen} options={{ headerTitle: 'ShelterBridge Cities' }} />
+                    <Tab.Screen name="Settings" component={CityStackScreen} options={{ headerTitle: 'ShelterBridge Cities' }} />
                 </Tab.Navigator>
             </NavigationContainer>
         </Provider>
