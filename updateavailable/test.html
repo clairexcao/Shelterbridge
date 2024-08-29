@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>TPI - Shelter Available Beds Update Page</title>
-</head>
-
 <body onload="initializeTable()"></body>
 <h3>Update TPI Available beds</h3>
 <label>Available Beds:</label>
@@ -15,34 +8,49 @@
         <th> Available Beds </th>
     </tr>
     <tr>
-        <td>Willamette Center</td>
-        <td id="59678093-2bd3-451f-8a40-0aa6ce003da2">0</td>
+        <td>Banfield Shelter Motel</td>
+        <td id="1e4e5e20-aece-41e3-b444-bb3f19a73c93">0</td>
     </tr>
     <tr>
-        <td>River District Navigation Center</td>
-        <td id="8dc6426f-a2d4-4cbd-a420-88835528f87f">0</td>
+        <td>Clark Center</td>
+        <td id="6018c2ba-ee36-4ac9-9dfb-9df5cd3f6d90">0</td>
+    </tr>
+    <tr>
+        <td>Doreen's Place</td>
+        <td id="baec99fb-6c5b-4d10-b755-31a75e1bd7d5">0</td>
     </tr>
     <tr>
         <td>Jean's Place</td>
         <td id="883fb326-3cb1-4941-9ebb-ac792349d054">0</td>
     </tr>
     <tr>
-        <td>Banfield Shelter Motel</td>
-        <td id="1e4e5e20-aece-41e3-b444-bb3f19a73c93">0</td>
+        <td>Laurelwood Center</td>
+        <td id="0c143d32-8f50-4a75-a214-9428cb33c89f">0</td>
+    </tr>
+    <tr>
+        <td>River District Navigation Center</td>
+        <td id="8dc6426f-a2d4-4cbd-a420-88835528f87f">0</td>
     </tr>
     <tr>
         <td>Walnut Park Shelter</td>
         <td id="d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa">0</td>
     </tr>
+    <tr>
+        <td>Willamette Center</td>
+        <td id="59678093-2bd3-451f-8a40-0aa6ce003da2">0</td>
+    </tr>
 </table>
 <p></p>
 <label for="location">Select a shelter location:</label>
 <select id="location" name="location" onchange="clearBedsInput()">
-    <option value="59678093-2bd3-451f-8a40-0aa6ce003da2">Willamette Center</option>
-    <option value="8dc6426f-a2d4-4cbd-a420-88835528f87f">River District Navigation Center</option>
-    <option value="883fb326-3cb1-4941-9ebb-ac792349d054">Jean's Place</option>
     <option value="1e4e5e20-aece-41e3-b444-bb3f19a73c93">Banfield Shelter Motel</option>
+    <option value="6018c2ba-ee36-4ac9-9dfb-9df5cd3f6d90">Clark Center</option>
+    <option value="baec99fb-6c5b-4d10-b755-31a75e1bd7d5">Doreen's Place</option>
+    <option value="883fb326-3cb1-4941-9ebb-ac792349d054">Jean's Place</option>
+    <option value="0c143d32-8f50-4a75-a214-9428cb33c89f">Laurelwood Center</option>
+    <option value="8dc6426f-a2d4-4cbd-a420-88835528f87f">River District Navigation Center</option>
     <option value="d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa">Walnut Park Shelter</option>
+    <option value="59678093-2bd3-451f-8a40-0aa6ce003da2">Willamette Center</option>
 </select>
 <p></p>
 <p></p>
@@ -51,17 +59,21 @@
 <button type="submit" onclick="setBeds()">Submit</button>
 <script>
     async function initializeTable() {
-        const beds1 = await getbeds('59678093-2bd3-451f-8a40-0aa6ce003da2');
-        const beds2 = await getbeds('8dc6426f-a2d4-4cbd-a420-88835528f87f');
-        const beds3 = await getbeds('883fb326-3cb1-4941-9ebb-ac792349d054');
-        const beds4 = await getbeds('1e4e5e20-aece-41e3-b444-bb3f19a73c93');
-        const beds5 = await getbeds('d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa');
+        const sites = [
+            '1e4e5e20-aece-41e3-b444-bb3f19a73c93',
+            '6018c2ba-ee36-4ac9-9dfb-9df5cd3f6d90',
+            'baec99fb-6c5b-4d10-b755-31a75e1bd7d5',
+            '883fb326-3cb1-4941-9ebb-ac792349d054',
+            '0c143d32-8f50-4a75-a214-9428cb33c89f',
+            '8dc6426f-a2d4-4cbd-a420-88835528f87f',
+            'd7b5c422-d6aa-43ad-9d79-3d6ded34a8fa',
+            '59678093-2bd3-451f-8a40-0aa6ce003da2'
+        ]
 
-        document.getElementById("59678093-2bd3-451f-8a40-0aa6ce003da2").innerText = beds1;
-        document.getElementById("8dc6426f-a2d4-4cbd-a420-88835528f87f").innerText = beds2;
-        document.getElementById("883fb326-3cb1-4941-9ebb-ac792349d054").innerText = beds3;
-        document.getElementById("1e4e5e20-aece-41e3-b444-bb3f19a73c93").innerText = beds4;
-        document.getElementById("d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa").innerText = beds5;
+        for (let i = 0; i < sites.length; i++) {
+            const beds = await getbeds(sites[i]);
+            document.getElementById(sites[i]).innerText = beds;
+        }
 
         clearBedsInput();
     }
@@ -111,5 +123,3 @@
     }
 </script>
 </body>
-
-</html>
