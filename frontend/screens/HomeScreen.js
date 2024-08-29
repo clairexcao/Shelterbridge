@@ -31,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
 
     const fetchResources = async (category) => {
         let cityname = await _retrieveData('cityname');
-        if (cityname == null) {
+        if (!cityname) {
             cityname = 'Portland, OR';
         }
         try {

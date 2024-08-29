@@ -94,6 +94,9 @@ function App() {
         const getCurrentCity = async () => {
             const cityname = await _retrieveData('cityname');
             console.log('current city', cityname);
+            if (!cityname) {
+                cityname = 'Portland, OR';
+            }
             config.city = cityname;
             setCurrentCity(cityname);
         };
