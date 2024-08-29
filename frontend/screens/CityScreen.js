@@ -49,8 +49,10 @@ const CityScreen = () => {
                 if (selectedCity) {
                     setSelectedButton(cities.indexOf(selectedCity));
                 }
-
+            } else {
+                setSelectedButton(cities.indexOf('Portland, OR'));
             }
+
         };
         setCurrentCity();
     }, []);
