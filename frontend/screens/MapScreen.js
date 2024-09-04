@@ -157,7 +157,7 @@ const MapScreen = ({ navigation }) => {
                             key={category.id}
                             style={[
                                 styles.categoryItem,
-                                selectedCategories.includes(category.id) && styles.selectedCategoryItem
+                                selectedCategories.includes(category.api) && styles.selectedCategoryItem
                             ]}
                             onPress={() => handleSelectedCategoriesChange(category.api)}>
                             <Icon name={category.icon} size={30} color="#b8a9c9" />
