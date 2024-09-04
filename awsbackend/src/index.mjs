@@ -178,7 +178,7 @@ async function createChat(event) {
                 }
                 ],
                 max_tokens: 150,
-                model: 'gpt-3.5-turbo',
+                model: 'gpt-4o-mini',
             },
             {
                 headers: {
