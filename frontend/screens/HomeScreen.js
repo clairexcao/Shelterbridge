@@ -36,7 +36,7 @@ const HomeScreen = ({ navigation }) => {
             cityname = 'Portland, OR';
         }
         try {
-            const response = await axios.get(`${config.api}/categories/v2/${category.api}?cityname=${cityname}`);
+            const response = await axios.get(`${config.backendUrl}/categories/v2/${category.api}?cityname=${cityname}`);
             return response.data;
         } catch (error) {
             console.error('Failed to fetch resources:', error);

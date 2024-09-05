@@ -8,11 +8,18 @@ import config from '../config';
 const ResourceList = ({ route, navigation }) => {
     const { resources, title } = route.params;
     let filteredResources = resources;
-    if (title == 'Available Beds') {
-        // fitler out resources with capacity
-        filteredResources = resources.filter(resource => resource.available != undefined);
+    if (title == 'Available Beds' || title == 'Shelter') {
+        // filter out resources with capacity
+        if (title == 'Available Beds') {
+            filteredResources = resources.filter(resource => resource.available != undefined);
+        }
         // caclulate distance
         filteredResources.forEach(resource => {
+            if (resource.latitude == undefined || resource.longitude == undefined ||
+                resource.latitude == 0 || resource.longitude == 0) {
+                resource.distance = undefined;
+                return;
+            }
             const start = {
                 latitude: config.location.coords.latitude,
                 longitude: config.location.coords.longitude
@@ -24,21 +31,9 @@ const ResourceList = ({ route, navigation }) => {
             resource.distance = haversine(start, end, { unit: 'mile' });
         });
         // sort
-        filteredResources.sort((a, b) => a.distance - b.distance);
-    }
-    if (title == 'Shelter') {
-        // caclulate distance
-        filteredResources.forEach(resource => {
-            const start = {
-                latitude: config.location.coords.latitude,
-                longitude: config.location.coords.longitude
-            };
-            const end = {
-                latitude: resource.latitude,
-                longitude: resource.longitude
-            };
-            resource.distance = haversine(start, end, { unit: 'mile' });
-        });
+        if (title == 'Available Beds') {
+            filteredResources.sort((a, b) => a.distance - b.distance);
+        }
     }
 
     return (
@@ -68,8 +63,8 @@ const ResourceList = ({ route, navigation }) => {
                     availableStyle = styles.resourceUnavailable;
                 }
 
-                let lastUpdate = resource.updateTime ? new Date(resource.updateTime).toLocaleString() : undefined;
-                let distance = resource.distance ? resource.distance.toFixed(2) : undefined;
+                let lastUpdate = resource.updateTime ? new Date(resource.updateTime).toLocaleString() : 'N/A';
+                let distance = resource.distance ? resource.distance.toFixed(2) + ' miles' : 'N/A';
 
                 return (<TouchableOpacity
                     key={index}
@@ -78,7 +73,7 @@ const ResourceList = ({ route, navigation }) => {
                 >
                     <Text style={styles.resourceTitle}>{resource.name}</Text>
                     <Text style={styles.resourceDescription}>{info}</Text>
-                    {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Distance: {distance} miles</Text>) : null}
+                    {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Distance: {distance}</Text>) : null}
                     {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Capacity: {capacity}</Text>) : null}
                     {resource.category == 'Shelter' ? (<Text style={availableStyle}>Available: {available}</Text>) : null}
                     {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Last update: {lastUpdate}</Text>) : null}

@@ -10,7 +10,7 @@ const ResourceDetails = ({ route }) => {
 
     // fetch review function
     const fetchReviews = async () => {
-        const apiUrl = `${config.api}/reviews/v1/${resource.id}`;
+        const apiUrl = `${config.backendUrl}/reviews/v1/${resource.id}`;
         try {
             const response = await axios.get(apiUrl, {
                 headers: {
@@ -29,7 +29,7 @@ const ResourceDetails = ({ route }) => {
     }, [resource.id]);
 
     const handleReviewSubmit = async (reviewData) => {
-        const postUrl = `${config.api}/reviews/v1/${resource.id}`;
+        const postUrl = `${config.backendUrl}/reviews/v1/${resource.id}`;
         try {
             // post new review to the backend
             await axios.post(postUrl, reviewData, {
@@ -55,7 +55,7 @@ const ResourceDetails = ({ route }) => {
                 <Text style={styles.description}>{resource.description}</Text>
                 <View style={styles.infoBox}>
                     <Text style={styles.label}>Address</Text>
-                    <Text style={styles.content}>{resource.address}</Text>
+                    <Text style={styles.contentLink} onPress={() => openURL(`http://maps.apple.com/maps?daddr=${resource.address}`)}>{resource.address}</Text>
                 </View>
                 {resource.eligibility ? (<View style={styles.infoBox}>
                     <Text style={styles.label}>Eligibility</Text>

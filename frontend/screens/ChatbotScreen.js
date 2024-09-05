@@ -20,7 +20,7 @@ const ChatScreen = () => {
             //      });
             // console.log(res.data.output);
             // sendBotMessage(res.data.output);
-            const res = await axios.post(`${config.api}/chat/v1`,
+            const res = await axios.post(`${config.backendUrl}/chat/v1`,
                 {
                     input: inputText
                 },

@@ -29,7 +29,7 @@ const MapScreen = ({ navigation }) => {
     const fetchResources = async () => {
         try {
             const requests = categories.map(category =>
-                axios.get(`https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/categories/v1/${category.api}`)
+                axios.get(`${config.backendUrl}/categories/v1/${category.api}`)
             );
             const responses = await Promise.all(requests);
             const allResources = responses.flatMap(response => response.data);
