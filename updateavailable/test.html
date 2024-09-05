@@ -120,9 +120,9 @@
         const selectedLocation = document.getElementById("location").value;
         var value = document.getElementById("available").value;
         // offical
-        // const url = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/' + selectedLocation;
+        const url = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/' + selectedLocation;
         // test
-        const url = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/' + selectedLocation;
+        //const url = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/' + selectedLocation;
         return fetch(url, {
             method: 'POST',
             headers: {
