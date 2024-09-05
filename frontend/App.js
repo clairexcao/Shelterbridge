@@ -14,6 +14,7 @@ import ResourceDetails from './screens/ResourceDetails';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Location from 'expo-location';
 import config from './config.js';
 
 const Tab = createBottomTabNavigator();
@@ -89,6 +90,7 @@ function App() {
     };
 
     const [currentCity, setCurrentCity] = useState(null);
+    const [location, setLocation] = useState(null);
 
     useEffect(() => {
         const getCurrentCity = async () => {
@@ -101,6 +103,17 @@ function App() {
             setCurrentCity(cityname);
         };
         getCurrentCity();
+        const getCurrentPos = async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
+            let location = await Location.getCurrentPositionAsync({});
+            setLocation(location);
+            config.location = location;
+        };
+        getCurrentPos();
     }, []);
 
     return (

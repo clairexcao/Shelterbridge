@@ -3,8 +3,7 @@ import { KeyboardAvoidingView, View, Text, ScrollView, StyleSheet, Linking } fro
 import axios from 'axios';
 import ReviewComponent from './ReviewComponent';
 import styles from '../styles/ResourceDetailsStyles';
-import config
- from '../config';
+import config from '../config';
 const ResourceDetails = ({ route }) => {
     const { resource } = route.params;
     const [reviews, setReviews] = useState([]);

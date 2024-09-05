@@ -172,7 +172,8 @@ const MapScreen = ({ navigation }) => {
             <MapView
                 style={styles.map}
                 initialRegion={region}
-                region={region}>
+                region={region}
+                showsUserLocation={true}>
                 {filteredResources.map(resource => (
                     <Marker
                         key={resource.id}
