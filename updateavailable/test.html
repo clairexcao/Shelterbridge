@@ -99,9 +99,9 @@
     }
     async function getbeds(location) {
         // offical
-        // const url = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/' + location;
+        const url = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/' + location;
         // test
-        const url = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/' + location;
+        // const url = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/' + location;
         const response = await fetch(url, {
             method: 'GET',
             mode: 'cors',
