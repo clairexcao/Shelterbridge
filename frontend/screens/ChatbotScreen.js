@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { View, Text, TextInput, Button, ScrollView, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
+import config from '../config';
 
 const ChatScreen = () => {
     const [messages, setMessages] = useState([]);
@@ -19,7 +20,7 @@ const ChatScreen = () => {
             //      });
             // console.log(res.data.output);
             // sendBotMessage(res.data.output);
-            const res = await axios.post('https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/chat/v1',
+            const res = await axios.post(`${config.api}/chat/v1`,
                 {
                     input: inputText
                 },

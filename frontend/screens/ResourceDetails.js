@@ -3,14 +3,15 @@ import { KeyboardAvoidingView, View, Text, ScrollView, StyleSheet, Linking } fro
 import axios from 'axios';
 import ReviewComponent from './ReviewComponent';
 import styles from '../styles/ResourceDetailsStyles';
-
+import config
+ from '../config';
 const ResourceDetails = ({ route }) => {
     const { resource } = route.params;
     const [reviews, setReviews] = useState([]);
 
     // fetch review function
     const fetchReviews = async () => {
-        const apiUrl = `https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/reviews/v1/${resource.id}`;
+        const apiUrl = `${config.api}/reviews/v1/${resource.id}`;
         try {
             const response = await axios.get(apiUrl, {
                 headers: {
@@ -29,7 +30,7 @@ const ResourceDetails = ({ route }) => {
     }, [resource.id]);
 
     const handleReviewSubmit = async (reviewData) => {
-        const postUrl = `https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/reviews/v1/${resource.id}`;
+        const postUrl = `${config.api}/reviews/v1/${resource.id}`;
         try {
             // post new review to the backend
             await axios.post(postUrl, reviewData, {

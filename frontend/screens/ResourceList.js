@@ -38,6 +38,8 @@ const ResourceList = ({ route, navigation }) => {
                     availableStyle = styles.resourceUnavailable;
                 }
 
+                let lastUpdate = resource.updateTime ? new Date(resource.updateTime).toLocaleString() : undefined;
+
                 return (<TouchableOpacity
                     key={index}
                     style={styles.resourceItem}
@@ -47,6 +49,7 @@ const ResourceList = ({ route, navigation }) => {
                     <Text style={styles.resourceDescription}>{info}</Text>
                     {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Capacity: {capacity}</Text>) : null}
                     {resource.category == 'Shelter' ? (<Text style={availableStyle}>Available: {available}</Text>) : null}
+                    {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Last update: {lastUpdate}</Text>) : null}
                 </TouchableOpacity>
                 );
             })}

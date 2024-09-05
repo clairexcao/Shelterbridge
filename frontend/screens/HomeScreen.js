@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/HomeScreenStyles';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import config from '../config';
 
 const HomeScreen = ({ navigation }) => {
     const [categories, setCategories] = useState([
@@ -35,8 +36,7 @@ const HomeScreen = ({ navigation }) => {
             cityname = 'Portland, OR';
         }
         try {
-            //const response = await axios.get(`https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/categories/v1/${category.api}`);
-            const response = await axios.get(`https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/categories/v2/${category.api}?cityname=${cityname}`);
+            const response = await axios.get(`${config.api}/categories/v2/${category.api}?cityname=${cityname}`);
             return response.data;
         } catch (error) {
             console.error('Failed to fetch resources:', error);

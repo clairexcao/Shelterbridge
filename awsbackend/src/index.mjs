@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
-const resourceTableName = 'shelter-bridge-db';
+const resourceTableName = (process.env.env == 'prod') ? 'shelter-bridge-db': 'shelter-bridge-db-dev';
 
 async function createResource(event) {
     const body = JSON.parse(event.body);
@@ -224,7 +224,7 @@ async function getAvailableBeds(event) {
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify({ id: item.id, available: beds })
+        body: JSON.stringify({ id: item.id, available: beds, updateTime: item.updateTime }),
     };
 }
 
@@ -252,9 +252,10 @@ async function setAvailableBeds(event) {
         Key: {
             id: resource.id,
         },
-        UpdateExpression: "set available = :available",
+        UpdateExpression: "set available = :available, updateTime = :updateTime",
         ExpressionAttributeValues: {
             ":available": available,
+            ":updateTime": new Date().toISOString(),
         },
         ReturnValues: "ALL_NEW",
     });
