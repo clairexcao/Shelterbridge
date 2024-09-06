@@ -105,8 +105,10 @@ function App() {
         getCurrentCity();
         const getCurrentPos = async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
+            console.log('get location status', status);
             if (status !== 'granted') {
                 setErrorMsg('Permission to access location was denied');
+                config.location = null;
                 return;
             }
             let location = await Location.getCurrentPositionAsync({});

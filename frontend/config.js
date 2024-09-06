@@ -1,5 +1,6 @@
 const config = {
     city: 'Portland, OR',
+    location: undefined,
     // offical api gateway
      backendUrl: 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage',
     // test api gateway

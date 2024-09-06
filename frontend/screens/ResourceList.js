@@ -1,22 +1,26 @@
-// ResourceList.js
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import styles from '../styles/ResourceListStyles';
 import haversine from 'haversine';
 import config from '../config';
 
+
 const ResourceList = ({ route, navigation }) => {
     const { resources, title } = route.params;
     let filteredResources = resources;
-    if (title == 'Available Beds' || title == 'Shelter') {
-        // filter out resources with capacity
-        if (title == 'Available Beds') {
-            filteredResources = resources.filter(resource => resource.available != undefined);
-        }
+
+    // filter out resources with capacity
+    if (title == 'Available Beds') {
+        filteredResources = resources.filter(resource => resource.available != undefined);
+    }
+
+    // calculate distance and sort by it for Available Beds
+    if (config.location && (title == 'Available Beds' || title == 'Shelter')) {
         // caclulate distance
         filteredResources.forEach(resource => {
             if (resource.latitude == undefined || resource.longitude == undefined ||
-                resource.latitude == 0 || resource.longitude == 0) {
+                resource.latitude == 0 || resource.longitude == 0 ||
+                !config.location) {
                 resource.distance = undefined;
                 return;
             }
@@ -32,7 +36,12 @@ const ResourceList = ({ route, navigation }) => {
         });
         // sort
         if (title == 'Available Beds') {
-            filteredResources.sort((a, b) => a.distance - b.distance);
+            filteredResources.sort((a, b) => {
+                if (!a.distance || !b.distance) {
+                    return undefined;
+                }
+                return (a.distance - b.distance);
+            });
         }
     }
 
@@ -84,7 +93,5 @@ const ResourceList = ({ route, navigation }) => {
         </ScrollView>
     );
 };
-
-//hi
 
 export default ResourceList;
