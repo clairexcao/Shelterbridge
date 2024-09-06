@@ -17,21 +17,8 @@ const HomeScreen = ({ navigation }) => {
         { name: 'Women and Children', icon: 'human-female-girl', api: 'WomenAndChildren' }
     ]);
 
-
-    _retrieveData = async (key) => {
-        try {
-            const value = await AsyncStorage.getItem(key);
-            if (value !== null) {
-                return value;
-            }
-        } catch (error) {
-            // Error retrieving data
-            console.log(error)
-        }
-    };
-
     const fetchResources = async (category) => {
-        let cityname = await _retrieveData('cityname');
+        let cityname = config.city;
         if (!cityname) {
             cityname = 'Portland, OR';
         }
