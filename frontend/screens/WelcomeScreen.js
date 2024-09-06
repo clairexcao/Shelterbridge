@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; 
+import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 
 const WelcomeScreen = () => {
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -23,10 +23,7 @@ const WelcomeScreen = () => {
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ChatbotScreen')}>
         <Text style={styles.buttonText}>Click to Chat</Text>
       </TouchableOpacity>
-      <Text style={styles.exampleQuestionsTitle}>Example questions you can ask:</Text>
-      <Text style={styles.exampleQuestionsText}>- Where is the nearest shelter place?</Text>
-      <Text style={styles.exampleQuestionsText}>- Where is the nearest open food location?</Text>
-      <Text style={styles.exampleQuestionsText}>- What's the weather in Portland today?</Text>
+
     </ScrollView>
   );
 };
