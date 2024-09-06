@@ -229,6 +229,16 @@ async function getAvailableBeds(event) {
 
 async function setAvailableBeds(event) {
 
+    const authorization = event.headers.Authorization;
+    if (authorization != process.env.secret) {
+        return {
+            statusCode: 401,
+            body: JSON.stringify({
+                message: 'Error: Incorrect secret'
+            })
+        };
+    }
+
     let command = new GetCommand({
         TableName: resourceTableName,
         Key: {

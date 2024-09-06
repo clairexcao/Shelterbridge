@@ -68,6 +68,11 @@
     </tr>
 </table>
 <p></p>
+
+<label>Please provide secret:</label>
+<input type="password" id="secret" name="secret">
+<p></p>
+
 <label for="location">Select a shelter location:</label>
 <select id="location" name="location" onchange="clearBedsInput()">
     <option value="1e4e5e20-aece-41e3-b444-bb3f19a73c93">Banfield Shelter Motel</option>
@@ -81,6 +86,7 @@
 </select>
 <p></p>
 <p></p>
+
 <label for="available">Please update available beds:</label>
 <input type="text" id="available" name="available" placeholder="Enter available beds">
 <label for="waiting">waiting list:</label>
@@ -122,7 +128,7 @@
     // offical
     const backendUrl = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
     // test
-    //  const backendUrl = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
+    // const backendUrl = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
 
     async function getbeds(location) {
         const response = await fetch(backendUrl + location, {
@@ -144,16 +150,20 @@
         const selectedLocation = document.getElementById("location").value;
         var available = document.getElementById("available").value;
         var waiting = document.getElementById("waiting").value;
+        var secret = document.getElementById("secret").value;
         return fetch(backendUrl + selectedLocation, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': secret
             },
             body: JSON.stringify({ available: available, waiting: waiting })
         })
             .then(response => {
+                console.log('status', response.status);
                 // Handle the response here
                 if (!response.ok) {
+                    console.log('response', response);
                     throw new Error('Request failed');
                 }
                 document.getElementById(selectedLocation).innerText = available;
@@ -168,7 +178,8 @@
             })
             .catch(error => {
                 // Handle any errors here
-                console.error(error);
+                alert('Unalbe to update the information, please check the secret.');
+                console.error('setBeds', error.toString());
             });
     }
 </script>
