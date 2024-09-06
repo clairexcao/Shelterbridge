@@ -11,7 +11,7 @@
 <body onload="initializeTable()"></body>
 <h3>Update Transition Projects Sites Available Beds and Waiting List</h3>
 <p></p>
-<table style="width:50%">
+<table style="width:100%">
     <tr>
         <th> Shelter Location </th>
         <th> Available Beds </th>
@@ -89,8 +89,10 @@
 
 <label for="available">Please update available beds:</label>
 <input type="text" id="available" name="available" placeholder="Enter available beds">
-<label for="waiting">waiting list:</label>
+<p></p>
+<label for="waiting">Please update the waiting list:</label>
 <input type="text" id="waiting" name="waiting" placeholder="Enter number of waiting list">
+<p></p>
 <button type="submit" onclick="setBeds()">Submit</button>
 <script>
     async function initializeTable() {
