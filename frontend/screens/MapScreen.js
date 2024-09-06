@@ -28,8 +28,12 @@ const MapScreen = ({ navigation }) => {
 
     const fetchResources = async () => {
         try {
+            const cityname = config.city;
+            if (!cityname) {
+                cityname = 'Portland, OR';
+            }
             const requests = categories.map(category =>
-                axios.get(`${config.backendUrl}/categories/v1/${category.api}`)
+                axios.get(`${config.backendUrl}/categories/v2/${category.api}?cityname=${cityname}`)
             );
             const responses = await Promise.all(requests);
             const allResources = responses.flatMap(response => response.data);

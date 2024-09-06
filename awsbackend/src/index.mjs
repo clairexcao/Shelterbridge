@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
-const resourceTableName = (process.env.env == 'prod') ? 'shelter-bridge-db': 'shelter-bridge-db-dev';
+const resourceTableName = (process.env.env == 'prod') ? 'shelter-bridge-db' : 'shelter-bridge-db-dev';
 
 async function createResource(event) {
     const body = JSON.parse(event.body);
@@ -78,21 +78,19 @@ async function getCategoryInCity(event) {
         TableName: resourceTableName,
     });
 
-
     const response = await docClient.send(command);
     let result = [];
     for (const item of response.Items) {
-        console.log(JSON.stringify(item));
         if ((item.category == event.pathParameters.category) && (item.city == event.queryStringParameters.cityname)) {
             if (item.reviews) {
                 item.reviews = JSON.parse(item.reviews);
             } else {
                 item.reviews = [];
             }
+            console.log(JSON.stringify(item));
             result.push(item);
         }
     }
-    console.log(JSON.stringify(result));
     return {
         statusCode: 200,
         body: JSON.stringify(result),
