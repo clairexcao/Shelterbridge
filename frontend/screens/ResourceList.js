@@ -60,9 +60,15 @@ const ResourceList = ({ route, navigation }) => {
                 if (capacity == undefined) {
                     capacity = "N/A"
                 }
+
                 let available = resource.available;
                 if (available == undefined) {
                     available = "N/A"
+                }
+
+                let waiting = resource.waiting;
+                if (waiting == undefined) {
+                    waiting = "N/A"
                 }
 
                 let availableStyle = styles.resourceDescription;
@@ -85,6 +91,7 @@ const ResourceList = ({ route, navigation }) => {
                     {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Distance: {distance}</Text>) : null}
                     {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Capacity: {capacity}</Text>) : null}
                     {resource.category == 'Shelter' ? (<Text style={availableStyle}>Available: {available}</Text>) : null}
+                    {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Waiting List: {waiting}</Text>) : null}
                     {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Last update: {lastUpdate}</Text>) : null}
 
                 </TouchableOpacity>

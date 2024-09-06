@@ -217,12 +217,13 @@ async function getAvailableBeds(event) {
     console.log(response);
     const item = response.Item;
     const beds = item.available ? item.available : 0;
+    const waiting = item.waiting ? item.waiting : 0;
     return {
         statusCode: 200,
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify({ id: item.id, available: beds, updateTime: item.updateTime }),
+        body: JSON.stringify({ id: item.id, available: beds, updateTime: item.updateTime, waiting: waiting }),
     };
 }
 
@@ -243,16 +244,16 @@ async function setAvailableBeds(event) {
         };
     }
     let resource = response.Item;
-    const available = JSON.parse(event.body).available;
-
+    const request = JSON.parse(event.body);
     const udpateCommand = new UpdateCommand({
         TableName: resourceTableName,
         Key: {
             id: resource.id,
         },
-        UpdateExpression: "set available = :available, updateTime = :updateTime",
+        UpdateExpression: "set available = :available, waiting = :waiting, updateTime = :updateTime",
         ExpressionAttributeValues: {
-            ":available": available,
+            ":available": request.available,
+            ":waiting": request.waiting,
             ":updateTime": new Date().toISOString(),
         },
         ReturnValues: "ALL_NEW",
@@ -265,7 +266,7 @@ async function setAvailableBeds(event) {
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify({ available: available }),
+        body: JSON.stringify({ available: request.available, waiting: request.waiting }),
     };
 }
 
