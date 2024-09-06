@@ -45,7 +45,6 @@ const CityScreen = () => {
             const cityname = await _retrieveData('cityname');
             if (cityname) {
                 const selectedCity = cities.find(city => city.name === cityname);
-                console.log('selected city', selectedCity);
                 if (selectedCity) {
                     setSelectedButton(cities.indexOf(selectedCity));
                 }
@@ -61,7 +60,6 @@ const CityScreen = () => {
         setSelectedButton(index);
         _storeData('cityname', city.name);
         config.city = city.name;
-        console.log('current city set to', config.city);
     };
 
     return (

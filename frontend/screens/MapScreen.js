@@ -45,7 +45,6 @@ const MapScreen = ({ navigation }) => {
     };
 
     setCurrentRegion = (() => {
-        console.log('map config city', config.city);
         if (config.city === 'Portland, OR') {
             setRegion({
                 latitude: 45.5231,
