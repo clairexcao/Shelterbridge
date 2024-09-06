@@ -74,7 +74,8 @@ const ResourceDetails = ({ route }) => {
                 }
                 {resource.phone ? (<View style={styles.infoBox}>
                     <Text style={styles.label}>Phone Number</Text>
-                    <Text style={styles.content}>{resource.phone}</Text>
+                    <Text style={styles.contentLink} onPress={() => openURL(`tel:${resource.phone}`)}> {resource.phone}</Text>
+
                 </View>) : null
                 }
                 {resource.directions ? (<View style={styles.infoBox}>
