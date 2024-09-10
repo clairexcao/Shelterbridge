@@ -12,14 +12,14 @@ const ResourceList = ({ route, navigation }) => {
 
     const { resources, title } = route.params;
     let filteredResources = resources;
-
+    let isShelter = (title == 'Available Beds') || (title == 'Shelter');
     // filter out resources with capacity
     if (title == 'Available Beds') {
         filteredResources = resources.filter(resource => resource.available != undefined);
     }
 
     // calculate distance and sort by it for Available Beds
-    if (config.location && (title == 'Available Beds' || title == 'Shelter')) {
+    if (config.location && isShelter) {
         // caclulate distance
         filteredResources.forEach(resource => {
             if (resource.latitude == undefined || resource.longitude == undefined ||
@@ -66,39 +66,43 @@ const ResourceList = ({ route, navigation }) => {
         <ScrollView style={styles.container}>
 
             <TouchableOpacity style={styles.filterButton} onPress={toggleModal}>
-                <Text style={styles.filterButtonText}>Filter by Name or Term</Text>
+                <Text style={styles.filterButtonText}>{isShelter ? 'Filter by Name or Term' : 'Filter by Name'}</Text>
             </TouchableOpacity>
             <Modal
                 isVisible={isModalVisible}
                 onBackdropPress={toggleModal}
                 style={styles.modal}>
                 <View style={styles.modalContent}>
-                    <Text style={styles.modalTitle}>Select Filter by Name or Term</Text>
-                    {<TextInput
+                    <Text style={styles.modalTitle}>{isShelter ? 'Select Filter by Name or Term' : 'Select Filter by Name'}</Text>
+                    <TextInput
                         placeholder="Filter by Name"
                         value={filter}
                         onChangeText={setFiter}
-                        clearButtonMode= 'always'
+                        clearButtonMode='always'
                         style={styles.filterInput}
-                    />}
-                    <TouchableOpacity
-                        key={'Short Term'}
-                        style={[
-                            styles.modalItem,
-                            selectedTerms.includes('Short Term') && styles.selectedModalItem
-                        ]}
-                        onPress={() => handleSelectedItemChange('Short Term')}>
-                        <Text style={styles.modalItemText}>Short Term</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        key={'Long Term'}
-                        style={[
-                            styles.modalItem,
-                            selectedTerms.includes('Long Term') && styles.selectedModalItem
-                        ]}
-                        onPress={() => handleSelectedItemChange('Long Term')}>
-                        <Text style={styles.modalItemText}>Long Term</Text>
-                    </TouchableOpacity>
+                    />
+                    {isShelter ? (
+                        <TouchableOpacity
+                            key={'Short Term'}
+                            style={[
+                                styles.modalItem,
+                                selectedTerms.includes('Short Term') && styles.selectedModalItem
+                            ]}
+                            onPress={() => handleSelectedItemChange('Short Term')}>
+                            <Text style={styles.modalItemText}>Short Term</Text>
+                        </TouchableOpacity>
+                    ) : null}
+                    {isShelter ? (
+                        <TouchableOpacity
+                            key={'Long Term'}
+                            style={[
+                                styles.modalItem,
+                                selectedTerms.includes('Long Term') && styles.selectedModalItem
+                            ]}
+                            onPress={() => handleSelectedItemChange('Long Term')}>
+                            <Text style={styles.modalItemText}>Long Term</Text>
+                        </TouchableOpacity>
+                    ) : null}
                     <TouchableOpacity style={styles.applyButton} onPress={toggleModal}>
                         <Text style={styles.applyButtonText}>Apply</Text>
                     </TouchableOpacity>

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import styles from '../styles/MapScreenStyles';
 import config from '../config.js';
 
 const MapScreen = ({ navigation }) => {
@@ -192,65 +193,5 @@ const MapScreen = ({ navigation }) => {
     );
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    filterButton: {
-        backgroundColor: '#b8a9c9', // pastel purple
-        padding: 10,
-        borderRadius: 20,
-        alignItems: 'center',
-        margin: 10,
-    },
-    filterButtonText: {
-        color: 'white',
-        fontSize: 16,
-    },
-    modal: {
-        justifyContent: 'flex-end',
-        margin: 0,
-    },
-    modalContent: {
-        backgroundColor: 'white',
-        padding: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-    },
-    modalTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    categoryItem: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#CCC',
-    },
-    selectedCategoryItem: {
-        backgroundColor: '#E0E0E0',
-    },
-    categoryText: {
-        marginLeft: 10,
-        fontSize: 16,
-    },
-    applyButton: {
-        backgroundColor: '#b8a9c9', // pastel purple
-        padding: 10,
-        borderRadius: 20,
-        alignItems: 'center',
-        marginTop: 10,
-    },
-    applyButtonText: {
-        color: 'white',
-        fontSize: 16,
-    },
-    map: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height - 60,
-    },
-});
 
 export default MapScreen;
