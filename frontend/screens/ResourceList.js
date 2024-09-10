@@ -1,11 +1,13 @@
-import React from 'react';
-import { ScrollView, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, Text, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../styles/ResourceListStyles';
 import haversine from 'haversine';
 import config from '../config';
 
 
 const ResourceList = ({ route, navigation }) => {
+    const [filter, setFiter] = useState('');
+
     const { resources, title } = route.params;
     let filteredResources = resources;
 
@@ -46,9 +48,17 @@ const ResourceList = ({ route, navigation }) => {
     }
 
     return (
+
         <ScrollView style={styles.container}>
-            {/* <Text style={styles.title}>{title}</Text>  */}
+            <TextInput
+                placeholder="filterName"
+                value={filter}
+                onChangeText={setFiter}
+                style={styles.filterInput}
+            />
             {filteredResources.map((resource, index) => {
+                let visible = resource.name.toLowerCase().includes(filter.toLowerCase());
+
                 let info = resource.description;
                 if (resource.category == 'Hotline') {
                     info = resource.phone;
@@ -81,9 +91,10 @@ const ResourceList = ({ route, navigation }) => {
                 let lastUpdate = resource.updateTime ? new Date(resource.updateTime).toLocaleString() : 'N/A';
                 let distance = resource.distance ? resource.distance.toFixed(2) + ' miles' : 'N/A';
 
-                return (<TouchableOpacity
+                return (visible && <TouchableOpacity
                     key={index}
                     style={styles.resourceItem}
+                    autoCompleteType="off"
                     onPress={() => navigation.navigate('ResourceDetails', { resource })}
                 >
                     <Text style={styles.resourceTitle}>{resource.name}</Text>
