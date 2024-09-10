@@ -9,10 +9,10 @@ import config from '../config';
 const HomeScreen = ({ navigation }) => {
     const [categories, setCategories] = useState([
         { name: 'Available Beds', icon: 'bed', api: 'Shelter' },
-        { name: 'Hotlines', icon: 'phone', api: 'Hotline' },
         { name: 'Food', icon: 'food', api: 'Food' },
         { name: 'Shelter', icon: 'home-group', api: 'Shelter' },
         { name: 'Legal Assistance', icon: 'gavel', api: 'LegalAssistance' },
+        { name: 'Hotlines', icon: 'phone', api: 'Hotline' },
         { name: 'Mental Health', icon: 'emoticon-neutral-outline', api: 'MentalHealth' },
         { name: 'Women and Children', icon: 'human-female-girl', api: 'WomenAndChildren' }
     ]);
