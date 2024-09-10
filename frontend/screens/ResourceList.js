@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { ScrollView, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../styles/ResourceListStyles';
+import Modal from 'react-native-modal';
 import haversine from 'haversine';
 import config from '../config';
 
-
 const ResourceList = ({ route, navigation }) => {
     const [filter, setFiter] = useState('');
+    const [selectedTerms, setSelectedTerms] = useState(['Short Term', 'Long Term']);
+    const [isModalVisible, setModalVisible] = useState(false);
 
     const { resources, title } = route.params;
     let filteredResources = resources;
@@ -47,17 +49,71 @@ const ResourceList = ({ route, navigation }) => {
         }
     }
 
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
+
+    const handleSelectedItemChange = (itemStr) => {
+        setSelectedTerms(prevSelected =>
+            prevSelected.includes(itemStr)
+                ? prevSelected.filter(item => item !== itemStr)
+                : [...prevSelected, itemStr]
+        );
+    };
+
     return (
 
         <ScrollView style={styles.container}>
-            <TextInput
-                placeholder="filterName"
-                value={filter}
-                onChangeText={setFiter}
-                style={styles.filterInput}
-            />
+
+            <TouchableOpacity style={styles.filterButton} onPress={toggleModal}>
+                <Text style={styles.filterButtonText}>Filter by Name or Term</Text>
+            </TouchableOpacity>
+            <Modal
+                isVisible={isModalVisible}
+                onBackdropPress={toggleModal}
+                style={styles.modal}>
+                <View style={styles.modalContent}>
+                    <Text style={styles.modalTitle}>Select Filter by Name or Term</Text>
+                    {<TextInput
+                        placeholder="Filter by Name"
+                        value={filter}
+                        onChangeText={setFiter}
+                        clearButtonMode= 'always'
+                        style={styles.filterInput}
+                    />}
+                    <TouchableOpacity
+                        key={'Short Term'}
+                        style={[
+                            styles.modalItem,
+                            selectedTerms.includes('Short Term') && styles.selectedModalItem
+                        ]}
+                        onPress={() => handleSelectedItemChange('Short Term')}>
+                        <Text style={styles.modalItemText}>Short Term</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        key={'Long Term'}
+                        style={[
+                            styles.modalItem,
+                            selectedTerms.includes('Long Term') && styles.selectedModalItem
+                        ]}
+                        onPress={() => handleSelectedItemChange('Long Term')}>
+                        <Text style={styles.modalItemText}>Long Term</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.applyButton} onPress={toggleModal}>
+                        <Text style={styles.applyButtonText}>Apply</Text>
+                    </TouchableOpacity>
+                </View>
+            </Modal>
             {filteredResources.map((resource, index) => {
                 let visible = resource.name.toLowerCase().includes(filter.toLowerCase());
+
+                let termVisible = true;
+                if (!selectedTerms.includes('Short Term') && resource.term == 'Short Term') {
+                    termVisible = false;
+                }
+                if (!selectedTerms.includes('Long Term') && (resource.term == 'Long Term' || resource.term == undefined)) {
+                    termVisible = false;
+                }
 
                 let info = resource.description;
                 if (resource.category == 'Hotline') {
@@ -91,7 +147,7 @@ const ResourceList = ({ route, navigation }) => {
                 let lastUpdate = resource.updateTime ? new Date(resource.updateTime).toLocaleString() : 'N/A';
                 let distance = resource.distance ? resource.distance.toFixed(2) + ' miles' : 'N/A';
 
-                return (visible && <TouchableOpacity
+                return (visible && termVisible && <TouchableOpacity
                     key={index}
                     style={styles.resourceItem}
                     autoCompleteType="off"
