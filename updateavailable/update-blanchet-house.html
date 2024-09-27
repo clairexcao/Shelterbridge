@@ -1,0 +1,146 @@
+<head></head>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body onload="initializeTable()"></body>
+<h3>Update Blanchet House Sites Available Beds and Waiting List</h3>
+<p></p>
+<table style="width:100%">
+    <tr>
+        <th> Shelter Location </th>
+        <th> Capacity </th>
+        <th> Available Beds </th>
+        <th> Waiting List </th>
+        <th> Last Update </th>
+    </tr>
+    <tr>
+        <td>Blanchet House - Old Town</td>
+        <td id="8bbfa9f8-636f-4821-8f4a-76f2c3d36f04-capacity">0</td>
+        <td id="8bbfa9f8-636f-4821-8f4a-76f2c3d36f04">0</td>
+        <td id="8bbfa9f8-636f-4821-8f4a-76f2c3d36f04-waiting">0</td>
+        <td id="8bbfa9f8-636f-4821-8f4a-76f2c3d36f04-update">-</td>
+    </tr>
+    <tr>
+        <td>Blanchet Farm - Yamhill County</td>
+        <td id="e3603e3b-c650-46f4-9885-8d345d873945-capacity">0</td>
+        <td id="e3603e3b-c650-46f4-9885-8d345d873945">0</td>
+        <td id="e3603e3b-c650-46f4-9885-8d345d873945-waiting">0</td>
+        <td id="e3603e3b-c650-46f4-9885-8d345d873945-update">-</td>
+    </tr>
+</table>
+<p></p>
+
+<label>Please provide secret:</label>
+<input type="password" id="secret" name="secret">
+<p></p>
+
+<label for="location">Select a shelter location:</label>
+<select id="location" name="location" onchange="clearBedsInput()">
+    <option value="8bbfa9f8-636f-4821-8f4a-76f2c3d36f04">Blanchet House - Old Town</option>
+    <option value="e3603e3b-c650-46f4-9885-8d345d873945">Blanchet Farm - Yamhill County</option>
+</select>
+<p></p>
+<p></p>
+
+<label for="available">Please update available beds:</label>
+<input type="text" id="available" name="available" placeholder="Enter available beds">
+<p></p>
+<label for="waiting">Please update the waiting list:</label>
+<input type="text" id="waiting" name="waiting" placeholder="Enter number of waiting list">
+<p></p>
+<button type="submit" onclick="setBeds()">Submit</button>
+<script>
+    async function initializeTable() {
+        const sites = [
+            '8bbfa9f8-636f-4821-8f4a-76f2c3d36f04',
+            'e3603e3b-c650-46f4-9885-8d345d873945'
+        ]
+
+        for (let i = 0; i < sites.length; i++) {
+            const result = await getbeds(sites[i]);
+            const beds = result.available;
+            console.log(result);
+            document.getElementById(sites[i] + '-capacity').innerText = result.capacity;
+            document.getElementById(sites[i]).innerText = beds;
+            document.getElementById(sites[i] + '-waiting').innerText = result.waiting;
+            if (!result.updateTime) {
+                document.getElementById(sites[i] + '-update').innerText = '-';
+            } else {
+                const updateTime = new Date(result.updateTime).toLocaleString();
+                document.getElementById(sites[i] + '-update').innerText = updateTime;
+            }
+        }
+
+        clearBedsInput();
+    }
+    async function clearBedsInput() {
+        const selectedLocation = document.getElementById("location").value;
+        document.getElementById("available").value = document.getElementById(selectedLocation).innerText;
+        document.getElementById("waiting").value = document.getElementById(selectedLocation + '-waiting').innerText;
+    }
+    // offical
+    const backendUrl = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
+    // test
+    // const backendUrl = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
+
+    async function getbeds(location) {
+        const response = await fetch(backendUrl + location, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        console.log(data)
+        return {
+            capacity: data.capacity,
+            available: data.available,
+            waiting: data.waiting,
+            updateTime: data.updateTime
+        }
+    }
+    function setBeds() {
+        const selectedLocation = document.getElementById("location").value;
+        var available = document.getElementById("available").value;
+        var waiting = document.getElementById("waiting").value;
+        var secret = document.getElementById("secret").value;
+        return fetch(backendUrl + selectedLocation, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': secret
+            },
+            body: JSON.stringify({ available: available, waiting: waiting })
+        })
+            .then(response => {
+                console.log('status', response.status);
+                // Handle the response here
+                if (!response.ok) {
+                    console.log('response', response);
+                    throw new Error('Request failed');
+                }
+                document.getElementById(selectedLocation).innerText = available;
+                document.getElementById(selectedLocation + '-waiting').innerText = waiting;
+                document.getElementById(selectedLocation + '-update').innerText = new Date().toLocaleString();
+                return response.json();
+            })
+            .then(data => {
+                // Handle the response data here
+                console.log('update success', selectedLocation, available, waiting);
+                return data;
+            })
+            .catch(error => {
+                // Handle any errors here
+                alert('Unalbe to update the information, please check the secret.');
+                console.error('setBeds', error.toString());
+            });
+    }
+</script>
+</body>
