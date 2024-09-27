@@ -223,14 +223,16 @@ async function getAvailableBeds(event) {
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify({ id: item.id, available: beds, updateTime: item.updateTime, waiting: waiting }),
+        body: JSON.stringify({ id: item.id, capacity: item.capacity, available: beds, updateTime: item.updateTime, waiting: waiting }),
     };
 }
 
 async function setAvailableBeds(event) {
 
     const authorization = event.headers.Authorization;
-    if (authorization != process.env.secret) {
+    const secrets = process.env.secrets.split(',');
+    console.log(secrets)
+    if (!secrets.includes(authorization)) {
         return {
             statusCode: 401,
             body: JSON.stringify({
