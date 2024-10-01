@@ -94,7 +94,7 @@ function App() {
 
     useEffect(() => {
         const getCurrentCity = async () => {
-            const cityname = await _retrieveData('cityname');
+            let cityname = await _retrieveData('cityname');
             console.log('current city', cityname);
             if (!cityname) {
                 cityname = 'Portland, OR';
