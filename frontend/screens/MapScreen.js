@@ -104,6 +104,7 @@ const MapScreen = ({ navigation }) => {
     };
 
     const handleSelectedCategoriesChange = (api) => {
+        fetchResources();
         setSelectedCategories(prevSelected =>
             prevSelected.includes(api)
                 ? prevSelected.filter(item => item !== api)
