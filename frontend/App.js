@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { IconButton } from 'react-native-paper';
 import HomeScreen from './screens/HomeScreen';
 import MapScreen from './screens/MapScreen';
+import MapScreenAndroid from './screens/MapScreenAndroid';
 import CityScreen from './screens/CityScreen';
 import ChatbotScreen from './screens/ChatbotScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -16,6 +17,7 @@ import store from './redux/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 import config from './config.js';
+import { Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 const HomeStack = createNativeStackNavigator();
@@ -46,13 +48,23 @@ function HomeStackScreen() {
 
 function MapStackScreen() {
     return (
-        <MapStack.Navigator screenOptions={{ headerShown: false }}>
-            <MapStack.Screen name="MapScreen" component={MapScreen} />
-            <MapStack.Screen
-                name="ResourceDetails"
-                component={ResourceDetails}
-                options={{ headerShown: true, headerTitle: 'Details' }} />
-        </MapStack.Navigator>
+        Platform.OS === 'android' ? (
+            <MapStack.Navigator screenOptions={{ headerShown: false }}>
+                <MapStack.Screen name="MapScreen" component={MapScreenAndroid} />
+                <MapStack.Screen
+                    name="ResourceDetails"
+                    component={ResourceDetails}
+                    options={{ headerShown: true, headerTitle: 'Details' }} />
+            </MapStack.Navigator>
+        ) : (
+            <MapStack.Navigator screenOptions={{ headerShown: false }}>
+                <MapStack.Screen name="MapScreen" component={MapScreen} />
+                <MapStack.Screen
+                    name="ResourceDetails"
+                    component={ResourceDetails}
+                    options={{ headerShown: true, headerTitle: 'Details' }} />
+            </MapStack.Navigator>
+        )
     );
 }
 

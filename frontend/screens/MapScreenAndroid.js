@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../styles/MapScreenStyles';
 import config from '../config.js';
 
-const MapScreen = ({ navigation }) => {
+const MapScreenAndroid = ({ navigation }) => {
     const [resources, setResources] = useState([]);
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [isModalVisible, setModalVisible] = useState(false);
@@ -85,7 +85,7 @@ const MapScreen = ({ navigation }) => {
     });
 
     useEffect(() => {
-        fetchResources();
+        // fetchResources();
     }, []);
 
     const getResourcePinColor = (category) => {
@@ -104,7 +104,7 @@ const MapScreen = ({ navigation }) => {
     };
 
     const handleSelectedCategoriesChange = (api) => {
-        fetchResources();
+        // fetchResources();
         setSelectedCategories(prevSelected =>
             prevSelected.includes(api)
                 ? prevSelected.filter(item => item !== api)
@@ -170,4 +170,4 @@ const MapScreen = ({ navigation }) => {
 };
 
 
-export default MapScreen;
+export default MapScreenAndroid;
