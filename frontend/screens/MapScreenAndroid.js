@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -85,7 +85,7 @@ const MapScreenAndroid = ({ navigation }) => {
     });
 
     useEffect(() => {
-        // fetchResources();
+        fetchResources();
     }, []);
 
     const getResourcePinColor = (category) => {
@@ -104,7 +104,7 @@ const MapScreenAndroid = ({ navigation }) => {
     };
 
     const handleSelectedCategoriesChange = (api) => {
-        // fetchResources();
+        fetchResources();
         setSelectedCategories(prevSelected =>
             prevSelected.includes(api)
                 ? prevSelected.filter(item => item !== api)
@@ -153,6 +153,7 @@ const MapScreenAndroid = ({ navigation }) => {
                 style={styles.map}
                 initialRegion={region}
                 region={region}
+                provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}>
                 {filteredResources.map(resource => (
                     <Marker
