@@ -71,6 +71,11 @@ const ResourceDetails = ({ route }) => {
                     <Text style={styles.content}>{resource.hours}</Text>
                 </View>) : null
                 }
+                {resource.type ? (<View style={styles.infoBox}>
+                    <Text style={styles.label}>Type</Text>
+                    <Text style={styles.content}>{resource.type}</Text>
+                </View>) : null
+                }
                 {resource.email ? (<View style={styles.infoBox}>
                     <Text style={styles.label}>Email</Text>
                     <Text style={styles.content}>{resource.email}</Text>
@@ -87,11 +92,16 @@ const ResourceDetails = ({ route }) => {
                     <Text style={styles.content}>{resource.directions}</Text>
                 </View>) : null
                 }
-                <View style={styles.infoBox}>
+                {resource.directionslink ? (<View style={styles.infoBox}>
+                    <Text style={styles.label}>Directions</Text>
+                    <Text style={styles.contentLink} onPress={() => openURL(resource.directionslink)}>{resource.directionslink}</Text>
+                </View>) : null
+                }
+                {resource.website ? (<View style={styles.infoBox}>
                     <Text style={styles.label}>Website</Text>
                     <Text style={styles.contentLink} onPress={() => openURL(resource.website)}>{resource.website}</Text>
-                </View>
-
+                </View>) : null
+                }
                 <ReviewComponent id={resource.id} onSubmit={handleReviewSubmit} />
                 {
                     reviews.map((review, index) => (

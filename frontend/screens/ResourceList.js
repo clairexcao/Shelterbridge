@@ -126,20 +126,8 @@ const ResourceList = ({ route, navigation }) => {
                     info = resource.phone;
                 }
                 let capacity = resource.capacity;
-
-                if (capacity == undefined) {
-                    capacity = "N/A"
-                }
-
                 let available = resource.available;
-                if (available == undefined) {
-                    available = "N/A"
-                }
-
                 let waiting = resource.waiting;
-                if (waiting == undefined) {
-                    waiting = "N/A"
-                }
 
                 let availableStyle = styles.resourceDescription;
                 if (available > 0) {
@@ -148,8 +136,8 @@ const ResourceList = ({ route, navigation }) => {
                     availableStyle = styles.resourceUnavailable;
                 }
 
-                let lastUpdate = resource.updateTime ? new Date(resource.updateTime).toLocaleString() : 'N/A';
-                let distance = resource.distance ? resource.distance.toFixed(2) + ' miles' : 'N/A';
+                let lastUpdate = resource.updateTime ? new Date(resource.updateTime).toLocaleString() : undefined;
+                let distance = resource.distance ? resource.distance.toFixed(2) + ' miles' : undefined;
 
                 return (visible && termVisible && <TouchableOpacity
                     key={index}
@@ -159,11 +147,11 @@ const ResourceList = ({ route, navigation }) => {
                 >
                     <Text style={styles.resourceTitle}>{resource.name}</Text>
                     <Text style={styles.resourceDescription}>{info}</Text>
-                    {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Distance: {distance}</Text>) : null}
-                    {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Capacity: {capacity}</Text>) : null}
-                    {resource.category == 'Shelter' ? (<Text style={availableStyle}>Available: {available}</Text>) : null}
-                    {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Waiting List: {waiting}</Text>) : null}
-                    {resource.category == 'Shelter' ? (<Text style={styles.resourceDescription}>Last update: {lastUpdate}</Text>) : null}
+                    {resource.category == 'Shelter' ? (distance ? <Text style={styles.resourceDescription}>Distance: {distance}</Text> : null) : null}
+                    {resource.category == 'Shelter' ? (capacity ? <Text style={styles.resourceDescription}>Capacity: {capacity}</Text> : null) : null}
+                    {resource.category == 'Shelter' ? (available ? <Text style={availableStyle}>Available: {available}</Text> : null) : null}
+                    {resource.category == 'Shelter' ? (waiting ? <Text style={styles.resourceDescription}>Waiting List: {waiting}</Text> : null) : null}
+                    {resource.category == 'Shelter' ? (lastUpdate ? <Text style={styles.resourceDescription}>Last update: {lastUpdate}</Text> : null) : null}
 
                 </TouchableOpacity>
                 );

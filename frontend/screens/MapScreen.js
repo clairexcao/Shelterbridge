@@ -53,24 +53,43 @@ const MapScreen = ({ navigation }) => {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
             });
-        } else if (config.city === 'Philadelphia, PA') {
+        }
+        else if (config.city === 'Philadelphia, PA') {
             setRegion({
                 latitude: 39.9526,
                 longitude: -75.1652,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
             });
-        } else if (config.city === 'Seattle, WA') {
+        }
+        else if (config.city === 'Seattle, WA') {
             setRegion({
                 latitude: 47.6061,
                 longitude: -122.3328,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
             });
-        } else if (config.city === 'Los Angeles, CA') {
+        }
+        else if (config.city === 'Los Angeles, CA') {
             setRegion({
                 latitude: 34.0549,
                 longitude: -118.2426,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            });
+        }
+        else if (config.city === 'Coos Bay, OR') {
+            setRegion({
+                latitude: 43.3702,
+                longitude: -124.2134,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            });
+        }
+        else if (config.city === 'Charlotte, NC') {
+            setRegion({
+                latitude: 35.227085,
+                longitude: -80.843124,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
             });
