@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, View, Text, ScrollView, StyleSheet, Linking } from 'react-native';
+import { KeyboardAvoidingView, View, Text, ScrollView, StyleSheet, Linking, Platform } from 'react-native';
 import axios from 'axios';
 import ReviewComponent from './ReviewComponent';
 import styles from '../styles/ResourceDetailsStyles';
@@ -48,6 +48,10 @@ const ResourceDetails = ({ route }) => {
         Linking.openURL(url).catch(err => console.error("Couldn't load page", err));
     };
 
+    const addressURL = (Platform.OS === 'android') ?
+        (`http://maps.apple.com/maps?daddr=${resource.address}`) :
+        (`http://maps.google.com/maps?daddr=${resource.address}`);
+
     return (
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
             <ScrollView style={styles.container}>
@@ -55,7 +59,7 @@ const ResourceDetails = ({ route }) => {
                 <Text style={styles.description}>{resource.description}</Text>
                 <View style={styles.infoBox}>
                     <Text style={styles.label}>Address</Text>
-                    <Text style={styles.contentLink} onPress={() => openURL(`http://maps.apple.com/maps?daddr=${resource.address}`)}>{resource.address}</Text>
+                    <Text style={styles.contentLink} onPress={() => openURL(addressURL)}>{resource.address}</Text>
                 </View>
                 {resource.eligibility ? (<View style={styles.infoBox}>
                     <Text style={styles.label}>Eligibility</Text>
