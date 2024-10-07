@@ -1,4 +1,5 @@
 node_modules
 output
 package-lock.json
-
+./DS_Store
+awsbackend/.DS_Store
