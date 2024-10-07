@@ -1,5 +1,5 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { GetCommand, PutCommand, ScanCommand, UpdateCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { GetCommand, PutCommand, ScanCommand, UpdateCommand, QueryCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 import { v4 } from 'uuid';
 import axios from 'axios';
 
@@ -79,23 +79,22 @@ export default class RequestHandler {
 
     async getCategoryInCity(event) {
 
-        const command = new ScanCommand({
+        const category = event.pathParameters.category;
+        const cityname = event.queryStringParameters.cityname;
+
+        const command = new QueryCommand({
             TableName: this.resourceTableName,
+            IndexName: 'city-category-index',
+            KeyConditionExpression: "category = :category and city = :city",
+            ExpressionAttributeValues: {
+                ":category": category,
+                ":city": cityname
+            },
         });
 
         const response = await this.docClient.send(command);
-        let result = [];
-        for (const item of response.Items) {
-            if ((item.category == event.pathParameters.category) && (item.city == event.queryStringParameters.cityname)) {
-                if (item.reviews) {
-                    item.reviews = JSON.parse(item.reviews);
-                } else {
-                    item.reviews = [];
-                }
-                console.log(JSON.stringify(item));
-                result.push(item);
-            }
-        }
+        console.log(response.Items);
+        let result = response.Items;
         return {
             statusCode: 200,
             body: JSON.stringify(result),
