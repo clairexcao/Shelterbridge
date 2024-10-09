@@ -12,6 +12,7 @@ const cities = [
     { name: 'Los Angeles, CA', icon: 'city' },
     { name: 'Coos Bay, OR', icon: 'city' },
     { name: 'Charlotte, NC', icon: 'city' },
+    { name: 'Polk-Marion-Yamhill, OR', icon: 'city' },
 ];
 
 _retrieveData = async (key) => {

@@ -57,6 +57,11 @@ const ResourceDetails = ({ route }) => {
             <ScrollView style={styles.container}>
                 <Text style={styles.title}>{resource.name}</Text>
                 <Text style={styles.description}>{resource.description}</Text>
+                {resource.type ? (<View style={styles.infoBox}>
+                    <Text style={styles.label}>Type</Text>
+                    <Text style={styles.content}>{resource.type}</Text>
+                </View>) : null
+                }
                 <View style={styles.infoBox}>
                     <Text style={styles.label}>Address</Text>
                     <Text style={styles.contentLink} onPress={() => openURL(addressURL)}>{resource.address}</Text>
@@ -69,11 +74,6 @@ const ResourceDetails = ({ route }) => {
                 {resource.hours ? (< View style={styles.infoBox}>
                     <Text style={styles.label}>Hours</Text>
                     <Text style={styles.content}>{resource.hours}</Text>
-                </View>) : null
-                }
-                {resource.type ? (<View style={styles.infoBox}>
-                    <Text style={styles.label}>Type</Text>
-                    <Text style={styles.content}>{resource.type}</Text>
                 </View>) : null
                 }
                 {resource.email ? (<View style={styles.infoBox}>
@@ -95,6 +95,11 @@ const ResourceDetails = ({ route }) => {
                 {resource.directionslink ? (<View style={styles.infoBox}>
                     <Text style={styles.label}>Directions</Text>
                     <Text style={styles.contentLink} onPress={() => openURL(resource.directionslink)}>{resource.directionslink}</Text>
+                </View>) : null
+                }
+                {resource.servicearea ? (<View style={styles.infoBox}>
+                    <Text style={styles.label}>Areas Served</Text>
+                    <Text style={styles.content}>{resource.servicearea}</Text>
                 </View>) : null
                 }
                 {resource.website ? (<View style={styles.infoBox}>

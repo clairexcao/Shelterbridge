@@ -9,8 +9,9 @@ let currentRecord = createNewRecord();
 function createNewRecord() {
     const defaultRecord = {
         id: uuidv4(),
-        category: 'Food',
-        city: 'Coos Bay, OR'
+        category: 'Shelter',
+        type: 'Transitional Housing',
+        city: 'Polk-Marion-Yamhill, OR'
     }
     return defaultRecord;
 }
