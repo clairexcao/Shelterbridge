@@ -13,13 +13,15 @@ const ResourceList = ({ route, navigation }) => {
     const { resources, title } = route.params;
     let filteredResources = resources;
     let isShelter = (title == 'Available Beds') || (title == 'Shelter');
+    let isFood = (title == 'Food');
+    let shouldCalculateDistance = config.location && (isShelter || isFood);
     // filter out resources with capacity
     if (title == 'Available Beds') {
         filteredResources = resources.filter(resource => resource.available != undefined);
     }
 
     // calculate distance and sort by it for Available Beds
-    if (config.location && isShelter) {
+    if (shouldCalculateDistance) {
         // caclulate distance
         filteredResources.forEach(resource => {
             if (resource.latitude == undefined || resource.longitude == undefined ||
@@ -147,7 +149,7 @@ const ResourceList = ({ route, navigation }) => {
                 >
                     <Text style={styles.resourceTitle}>{resource.name}</Text>
                     <Text style={styles.resourceDescription}>{info}</Text>
-                    {resource.category == 'Shelter' ? (distance ? <Text style={styles.resourceDescription}>Distance: {distance}</Text> : null) : null}
+                    {shouldCalculateDistance ? (distance ? <Text style={styles.resourceDescription}>Distance: {distance}</Text> : null) : null}
                     {resource.category == 'Shelter' ? (capacity ? <Text style={styles.resourceDescription}>Capacity: {capacity}</Text> : null) : null}
                     {resource.category == 'Shelter' ? (available ? <Text style={availableStyle}>Available: {available}</Text> : null) : null}
                     {resource.category == 'Shelter' ? (waiting ? <Text style={styles.resourceDescription}>Waiting List: {waiting}</Text> : null) : null}

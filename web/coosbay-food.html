@@ -1,0 +1,85 @@
+<head></head>
+<style>
+
+</style>
+</head>
+
+<body onload="initializeTable()"></body>
+<h3 style="color: blue; text-align: center;">Coos-Curry Country Shelter Services</h3>
+<p></p>
+<script>
+    async function initializeTable() {
+        const data = getResources('Coos Bay, OR', 'Shelter');
+        createSections(data);
+    }
+
+    function createSections(data) {
+        const body = document.querySelector('body');
+
+        data.forEach(item => {
+
+            const section = document.createElement('section');
+            section.style.marginLeft = '20%';
+            section.style.marginRight = '20%';
+            const title = document.createElement('h3');
+            title.style.color = 'black';
+            title.style.textAlign = 'center';
+            title.textContent = item.name;
+
+            const description = document.createElement('p');
+            description.textContent = `Description: ${item.description}`;
+            const address = document.createElement('p');
+            address.textContent = `Address: ${item.address}`;
+            const website = document.createElement('a');
+            website.href = item.website;
+            website.textContent = `Website: ${item.website}`;
+            website.target = '_blank';
+            const phone = document.createElement('p');
+            phone.textContent = `Phone: ${item.phone}`;
+
+            const emptyLine = document.createElement('br');
+            section.appendChild(emptyLine);
+
+            section.appendChild(title);
+            section.appendChild(address);
+            section.appendChild(phone);
+
+            if (item.eligibility) {
+                const eligibility = document.createElement('p');
+                eligibility.textContent = `Eligibility: ${item.eligibility}`;
+                section.appendChild(eligibility);
+            }
+
+            section.appendChild(website);
+            if (item.email) {
+                const email = document.createElement('p');
+                email.textContent = `Email: ${item.email}`;
+                section.appendChild(email);
+            }
+
+            section.appendChild(description);
+            body.appendChild(section);
+        });
+    }
+
+    async function initializeTable() {
+        const data = await getResources('Coos Bay, OR', 'Shelter');
+        createSections(data);
+    }
+    // offical
+    const backendUrl = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/categories/v2';
+    async function getResources(city, category) {
+        const response = await fetch(`${backendUrl}/${category}?cityname=${city}`, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        console.log(data)
+        return data;
+    }
+
+</script>
+</body>

@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     currentCityButtonText: {
         marginLeft: 10,
         color: '#000',
-        fontSize: 18
+        fontWeight: 'bold',
+        fontSize: 16
     }
 });
 

@@ -17,6 +17,10 @@ Resources:
     Properties:
       Name: !Sub ${AWS::StackName}-api
       StageName: stage
+      Cors:
+        AllowMethods: "'POST, GET, OPTIONS'"
+        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+        AllowOrigin: "'*'"
       MethodSettings:
       - ResourcePath: /*
         HttpMethod: '*'

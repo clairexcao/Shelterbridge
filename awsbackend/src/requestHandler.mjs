@@ -97,6 +97,9 @@ export default class RequestHandler {
         let result = response.Items;
         return {
             statusCode: 200,
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            },
             body: JSON.stringify(result),
         };
     }

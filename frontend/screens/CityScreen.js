@@ -7,12 +7,12 @@ import config from '../config.js';
 
 const cities = [
     { name: 'Portland, OR', icon: 'city' },
+    { name: 'Coos Bay, OR', text: 'Coos-Curry, OR', icon: 'city' },
+    { name: 'Polk-Marion-Yamhill, OR', icon: 'city' },
     { name: 'Philadelphia, PA', icon: 'city' },
     { name: 'Seattle, WA', icon: 'city' },
     { name: 'Los Angeles, CA', icon: 'city' },
-    { name: 'Coos Bay, OR', icon: 'city' },
     { name: 'Charlotte, NC', icon: 'city' },
-    { name: 'Polk-Marion-Yamhill, OR', icon: 'city' },
 ];
 
 _retrieveData = async (key) => {
@@ -76,7 +76,7 @@ const CityScreen = () => {
                         onPress={() => handlePress(index, city)}
                     >
                         <Icon name={selectedButton === index ? 'home' : city.icon} size={30} color={selectedButton === index ? "black" : "#fff"} />
-                        <Text style={selectedButton === index ? styles.currentCityButtonText : styles.buttonText}>{city.name}</Text>
+                        <Text style={selectedButton === index ? styles.currentCityButtonText : styles.buttonText}>{city.text ? city.text : city.name}</Text>
                     </TouchableOpacity>
                 );
             })
