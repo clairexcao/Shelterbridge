@@ -86,11 +86,19 @@ const MapScreen = ({ navigation }) => {
                 longitudeDelta: 0.0421,
             });
         }
+        else if (config.city === 'Polk-Marion-Yamhill, OR') {
+            setRegion({
+                latitude: 44.9429,
+                longitude: -123.0351,
+                latitudeDelta: 0.50,
+                longitudeDelta: 0.30,
+            });
+        }
         else if (config.city === 'Charlotte, NC') {
             setRegion({
                 latitude: 35.227085,
                 longitude: -80.843124,
-                latitudeDelta: 0.0922,
+                latitudeDelta: 0.1922,
                 longitudeDelta: 0.0421,
             });
         } else {
