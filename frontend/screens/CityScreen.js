@@ -7,8 +7,8 @@ import config from '../config.js';
 
 const cities = [
     { name: 'Portland, OR', icon: 'city' },
-    { name: 'Coos Bay, OR', text: 'Coos-Curry, OR', icon: 'city' },
-    { name: 'Polk-Marion-Yamhill, OR', icon: 'city' },
+    { name: 'Coos Bay, OR', text: 'Coos-Curry, OR', icon: 'lighthouse' },
+    { name: 'Polk-Marion-Yamhill, OR', icon: 'pine-tree' },
     { name: 'Philadelphia, PA', icon: 'city' },
     { name: 'Seattle, WA', icon: 'city' },
     { name: 'Los Angeles, CA', icon: 'city' },
@@ -75,7 +75,7 @@ const CityScreen = () => {
                         style={selectedButton === index ? styles.button : styles.button}
                         onPress={() => handlePress(index, city)}
                     >
-                        <Icon name={selectedButton === index ? 'home' : city.icon} size={30} color={selectedButton === index ? "black" : "#fff"} />
+                        <Icon name={selectedButton === index ? city.icon : city.icon} size={30} color={selectedButton === index ? "black" : "#fff"} />
                         <Text style={selectedButton === index ? styles.currentCityButtonText : styles.buttonText}>{city.text ? city.text : city.name}</Text>
                     </TouchableOpacity>
                 );
