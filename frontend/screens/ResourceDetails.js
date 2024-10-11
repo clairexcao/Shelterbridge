@@ -62,10 +62,12 @@ const ResourceDetails = ({ route }) => {
                     <Text style={styles.content}>{resource.type}</Text>
                 </View>) : null
                 }
-                <View style={styles.infoBox}>
-                    <Text style={styles.label}>Address</Text>
-                    <Text style={styles.contentLink} onPress={() => openURL(addressURL)}>{resource.address}</Text>
-                </View>
+                {resource.address ?
+                    <View style={styles.infoBox}>
+                        <Text style={styles.label}>Address</Text>
+                        <Text style={styles.contentLink} onPress={() => openURL(addressURL)}>{resource.address}</Text>
+                    </View> : null
+                }
                 {resource.eligibility ? (<View style={styles.infoBox}>
                     <Text style={styles.label}>Eligibility</Text>
                     <Text style={styles.content}>{resource.eligibility}</Text>
