@@ -37,7 +37,8 @@ const MapScreen = ({ navigation }) => {
                 axios.get(`${config.backendUrl}/categories/v2/${category.api}?cityname=${cityname}`)
             );
             const responses = await Promise.all(requests);
-            const allResources = responses.flatMap(response => response.data);
+            let allResources = responses.flatMap(response => response.data);
+            allResources = allResources.filter(resource => resource.latitude && resource.longitude);
             setResources(allResources);
         } catch (error) {
             console.error('Failed to fetch resources:', error);

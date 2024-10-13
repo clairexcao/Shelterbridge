@@ -37,7 +37,8 @@ const MapScreenAndroid = ({ navigation }) => {
                 axios.get(`${config.backendUrl}/categories/v2/${category.api}?cityname=${cityname}`)
             );
             const responses = await Promise.all(requests);
-            const allResources = responses.flatMap(response => response.data);
+            let allResources = responses.flatMap(response => response.data);
+            allResources = allResources.filter(resource => resource.latitude && resource.longitude);
             setResources(allResources);
         } catch (error) {
             console.error('Failed to fetch resources:', error);
@@ -74,7 +75,23 @@ const MapScreenAndroid = ({ navigation }) => {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
             });
-        } else {
+        } else if (config.city === 'Coos Bay, OR') {
+            setRegion({
+                latitude: 43.3702,
+                longitude: -124.2134,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            });
+        }
+        else if (config.city === 'Polk-Marion-Yamhill, OR') {
+            setRegion({
+                latitude: 44.9429,
+                longitude: -123.0351,
+                latitudeDelta: 0.50,
+                longitudeDelta: 0.30,
+            });
+        }
+        else {
             setRegion({
                 latitude: 45.5231,
                 longitude: -122.6765,
@@ -85,7 +102,7 @@ const MapScreenAndroid = ({ navigation }) => {
     });
 
     useEffect(() => {
-        fetchResources();
+        // fetchResources();
     }, []);
 
     const getResourcePinColor = (category) => {

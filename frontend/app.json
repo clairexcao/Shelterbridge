@@ -2,7 +2,7 @@
     "expo": {
         "name": "ShelterBridge",
         "slug": "ShelterBridge",
-        "version": "1.0.20",
+        "version": "1.0.21",
         "assetBundlePatterns": [
             "**/*"
         ],
@@ -34,7 +34,7 @@
                 "android.permission.ACCESS_FINE_LOCATION"
             ],
             "package": "com.shelterbridge.androidapp",
-            "versionCode": 6,
+            "versionCode": 7,
             "config": {
                 "googleMaps": {
                     "apiKey": "AIzaSyBfW7FoEla3OsQ4VhdkWgD3wOfmCthN6Ag"
