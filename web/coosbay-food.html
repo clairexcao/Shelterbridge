@@ -4,82 +4,92 @@
 </style>
 </head>
 
-<body onload="initializeTable()"></body>
-<h3 style="color: blue; text-align: center;">Coos-Curry Country Shelter Services</h3>
-<p></p>
-<script>
-    async function initializeTable() {
-        const data = getResources('Coos Bay, OR', 'Shelter');
-        createSections(data);
-    }
+<body onload="initializeTable()">
+    <h3 style="color: blue; text-align: center;">Polk-Marion-Yamhill Counties Mental Health Services</h3>
+    <section id="content-section"></section>
+    <p></p>
+    <script>
 
-    function createSections(data) {
-        const body = document.querySelector('body');
+        async function initializeTable() {
+            const data = await getResources('Polk-Marion-Yamhill, OR', 'MentalHealth');
+            createSections(data);
+        }
 
-        data.forEach(item => {
 
-            const section = document.createElement('section');
-            section.style.marginLeft = '20%';
-            section.style.marginRight = '20%';
-            const title = document.createElement('h3');
-            title.style.color = 'black';
-            title.style.textAlign = 'center';
-            title.textContent = item.name;
+        function createSections(data) {
+            const parentSection = document.getElementById('content-section');
 
-            const description = document.createElement('p');
-            description.textContent = `Description: ${item.description}`;
-            const address = document.createElement('p');
-            address.textContent = `Address: ${item.address}`;
-            const website = document.createElement('a');
-            website.href = item.website;
-            website.textContent = `Website: ${item.website}`;
-            website.target = '_blank';
-            const phone = document.createElement('p');
-            phone.textContent = `Phone: ${item.phone}`;
+            data.forEach(item => {
 
-            const emptyLine = document.createElement('br');
-            section.appendChild(emptyLine);
+                const section = document.createElement('section');
+                section.style.marginLeft = '20%';
+                section.style.marginRight = '20%';
 
-            section.appendChild(title);
-            section.appendChild(address);
-            section.appendChild(phone);
+                const emptyLine = document.createElement('br');
+                section.appendChild(emptyLine);
 
-            if (item.eligibility) {
-                const eligibility = document.createElement('p');
-                eligibility.textContent = `Eligibility: ${item.eligibility}`;
-                section.appendChild(eligibility);
-            }
+                const title = document.createElement('h3');
+                title.style.color = 'black';
+                title.style.textAlign = 'center';
+                title.textContent = item.name;
+                section.appendChild(title);
 
-            section.appendChild(website);
-            if (item.email) {
-                const email = document.createElement('p');
-                email.textContent = `Email: ${item.email}`;
-                section.appendChild(email);
-            }
+                if (item.address) {
+                    const address = document.createElement('p');
+                    address.textContent = `Address: ${item.address}`;
+                    section.appendChild(address);
+                }
 
-            section.appendChild(description);
-            body.appendChild(section);
-        });
-    }
+                if (item.phone) {
+                    const phone = document.createElement('p');
+                    phone.textContent = `Phone: ${item.phone}`;
+                    section.appendChild(phone);
+                }
 
-    async function initializeTable() {
-        const data = await getResources('Coos Bay, OR', 'Shelter');
-        createSections(data);
-    }
-    // offical
-    const backendUrl = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/categories/v2';
-    async function getResources(city, category) {
-        const response = await fetch(`${backendUrl}/${category}?cityname=${city}`, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        const data = await response.json();
-        console.log(data)
-        return data;
-    }
+                if (item.eligibility) {
+                    const eligibility = document.createElement('p');
+                    eligibility.textContent = `Eligibility: ${item.eligibility}`;
+                    section.appendChild(eligibility);
+                }
 
-</script>
+                if (item.email) {
+                    const email = document.createElement('p');
+                    email.textContent = `Email: ${item.email}`;
+                    section.appendChild(email);
+                }
+
+                if (item.description) {
+                    const description = document.createElement('p');
+                    description.textContent = `Description: ${item.description}`;
+                    section.appendChild(description);
+                }
+
+                if (item.website) {
+                    const website = document.createElement('a');
+                    website.href = item.website;
+                    website.textContent = `Website: ${item.website}`;
+                    website.target = '_blank';
+                    section.appendChild(website);
+                };
+
+                parentSection.appendChild(section);
+            });
+        }
+
+        // offical
+        const backendUrl = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/categories/v2';
+        // const backendUrl = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/categories/v2';
+        async function getResources(city, category) {
+            const response = await fetch(`${backendUrl}/${category}?cityname=${city}`, {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await response.json();
+            return data;
+        }
+
+    </script>
 </body>

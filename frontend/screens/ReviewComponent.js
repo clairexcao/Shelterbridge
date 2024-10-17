@@ -16,6 +16,10 @@ const ReviewComponent = ({ onSubmit }) => {
 
     return (
         <View style={styles.container}>
+            <Button
+                title="Submit Review"
+                onPress={handleSubmit}
+            />
             <TextInput
                 placeholder="Name"
                 value={name}
@@ -38,10 +42,6 @@ const ReviewComponent = ({ onSubmit }) => {
                 multiline
                 numberOfLines={4}
                 style={styles.textArea}
-            />
-            <Button
-                title="Submit Review"
-                onPress={handleSubmit}
             />
         </View>
     );
