@@ -27,7 +27,18 @@ const styles = StyleSheet.create({
         color: '#000',
         fontWeight: 'bold',
         fontSize: 16
-    }
+    },
+    cityButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#b8a9c9', // pastel purple color
+        padding: 15,
+        margin: 10,
+        borderRadius: 30,
+        width: 250
+    },
+
 });
 
 export default styles;

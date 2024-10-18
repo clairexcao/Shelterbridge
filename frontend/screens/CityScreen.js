@@ -73,7 +73,7 @@ const CityScreen = () => {
                 return (
                     <TouchableOpacity
                         key={index}
-                        style={selectedButton === index ? styles.button : styles.button}
+                        style={selectedButton === index ? styles.cityButton : styles.cityButton}
                         onPress={() => handlePress(index, city)}
                     >
                         <Icon name={selectedButton === index ? city.icon : city.icon} size={30} color={selectedButton === index ? "black" : "#fff"} />
