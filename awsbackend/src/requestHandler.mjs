@@ -237,16 +237,7 @@ export default class RequestHandler {
     async setAvailableBeds(event) {
 
         const authorization = event.headers.Authorization;
-        const secrets = process.env.secrets.split(',');
-        console.log(secrets)
-        if (!secrets.includes(authorization)) {
-            return {
-                statusCode: 401,
-                body: JSON.stringify({
-                    message: 'Error: Incorrect secret'
-                })
-            };
-        }
+        const adminSecrets = process.env.secrets.split(',');
 
         let command = new GetCommand({
             TableName: this.resourceTableName,
@@ -262,7 +253,19 @@ export default class RequestHandler {
                 body: JSON.stringify({ "error": "Resource not found" }),
             };
         }
+        // check secret
         let resource = response.Item;
+        if (!adminSecrets.includes(authorization)) {
+            if (!resource.secret || resource.secret != authorization) {
+                console.log(`Error: Incorrect secret ${authorization} does not match ${resource.secret}`);
+                return {
+                    statusCode: 401,
+                    body: JSON.stringify({
+                        message: 'Error: Incorrect secret'
+                    })
+                };
+            }
+        }
         const request = JSON.parse(event.body);
         const udpateCommand = new UpdateCommand({
             TableName: this.resourceTableName,

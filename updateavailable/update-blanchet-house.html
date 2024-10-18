@@ -85,9 +85,9 @@
         document.getElementById("waiting").value = document.getElementById(selectedLocation + '-waiting').innerText;
     }
     // offical
-    const backendUrl = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
+    //  const backendUrl = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
     // test
-    // const backendUrl = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
+    const backendUrl = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
 
     async function getbeds(location) {
         const response = await fetch(backendUrl + location, {
@@ -138,7 +138,7 @@
             })
             .catch(error => {
                 // Handle any errors here
-                alert('Unalbe to update the information, please check the secret.');
+                alert('Unable to update the information, please check the secret.');
                 console.error('setBeds', error.toString());
             });
     }

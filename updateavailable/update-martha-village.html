@@ -1,4 +1,4 @@
-<head>
+<head></head>
     <style>
         table,
         th,
@@ -9,62 +9,22 @@
 </head>
 
 <body onload="initializeTable()"></body>
-<h3>Update Transition Projects Sites Available Beds and Waiting List</h3>
+<h3>Update Martha's Village Available Beds and Waiting List</h3>
 <p></p>
 <table style="width:100%">
     <tr>
         <th> Shelter Location </th>
+        <th> Capacity </th>
         <th> Available Beds </th>
         <th> Waiting List </th>
         <th> Last Update </th>
     </tr>
     <tr>
-        <td>Banfield Shelter Motel</td>
-        <td id="1e4e5e20-aece-41e3-b444-bb3f19a73c93">0</td>
-        <td id="1e4e5e20-aece-41e3-b444-bb3f19a73c93-waiting">0</td>
-        <td id="1e4e5e20-aece-41e3-b444-bb3f19a73c93-update">-</td>
-    </tr>
-    <tr>
-        <td>Clark Center</td>
-        <td id="6018c2ba-ee36-4ac9-9dfb-9df5cd3f6d90">0</td>
-        <td id="6018c2ba-ee36-4ac9-9dfb-9df5cd3f6d90-waiting">0</td>
-        <td id="6018c2ba-ee36-4ac9-9dfb-9df5cd3f6d90-update">-</td>
-    </tr>
-    <tr>
-        <td>Doreen's Place</td>
-        <td id="baec99fb-6c5b-4d10-b755-31a75e1bd7d5">0</td>
-        <td id="baec99fb-6c5b-4d10-b755-31a75e1bd7d5-waiting">0</td>
-        <td id="baec99fb-6c5b-4d10-b755-31a75e1bd7d5-update">-</td>
-    </tr>
-    <tr>
-        <td>Jean's Place</td>
-        <td id="883fb326-3cb1-4941-9ebb-ac792349d054">0</td>
-        <td id="883fb326-3cb1-4941-9ebb-ac792349d054-waiting">0</td>
-        <td id="883fb326-3cb1-4941-9ebb-ac792349d054-update">-</td>
-    </tr>
-    <tr>
-        <td>Laurelwood Center</td>
-        <td id="0c143d32-8f50-4a75-a214-9428cb33c89f">0</td>
-        <td id="0c143d32-8f50-4a75-a214-9428cb33c89f-waiting">0</td>
-        <td id="0c143d32-8f50-4a75-a214-9428cb33c89f-update">-</td>
-    </tr>
-    <tr>
-        <td>River District Navigation Center</td>
-        <td id="8dc6426f-a2d4-4cbd-a420-88835528f87f">0</td>
-        <td id="8dc6426f-a2d4-4cbd-a420-88835528f87f-waiting">0</td>
-        <td id="8dc6426f-a2d4-4cbd-a420-88835528f87f-update">-</td>
-    </tr>
-    <tr>
-        <td>Walnut Park Shelter</td>
-        <td id="d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa">0</td>
-        <td id="d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa-waiting">0</td>
-        <td id="d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa-update">-</td>
-    </tr>
-    <tr>
-        <td>Willamette Center</td>
-        <td id="59678093-2bd3-451f-8a40-0aa6ce003da2">0</td>
-        <td id="59678093-2bd3-451f-8a40-0aa6ce003da2-waiting">0</td>
-        <td id="59678093-2bd3-451f-8a40-0aa6ce003da2-update">-</td>
+        <td>Martha's Village & Kitchen</td>
+        <td id="01697a14-9ae9-42a7-9868-1cfc93df2dc6-capacity">0</td>
+        <td id="01697a14-9ae9-42a7-9868-1cfc93df2dc6">0</td>
+        <td id="01697a14-9ae9-42a7-9868-1cfc93df2dc6-waiting">0</td>
+        <td id="01697a14-9ae9-42a7-9868-1cfc93df2dc6-update">-</td>
     </tr>
 </table>
 <p></p>
@@ -75,14 +35,7 @@
 
 <label for="location">Select a shelter location:</label>
 <select id="location" name="location" onchange="clearBedsInput()">
-    <option value="1e4e5e20-aece-41e3-b444-bb3f19a73c93">Banfield Shelter Motel</option>
-    <option value="6018c2ba-ee36-4ac9-9dfb-9df5cd3f6d90">Clark Center</option>
-    <option value="baec99fb-6c5b-4d10-b755-31a75e1bd7d5">Doreen's Place</option>
-    <option value="883fb326-3cb1-4941-9ebb-ac792349d054">Jean's Place</option>
-    <option value="0c143d32-8f50-4a75-a214-9428cb33c89f">Laurelwood Center</option>
-    <option value="8dc6426f-a2d4-4cbd-a420-88835528f87f">River District Navigation Center</option>
-    <option value="d7b5c422-d6aa-43ad-9d79-3d6ded34a8fa">Walnut Park Shelter</option>
-    <option value="59678093-2bd3-451f-8a40-0aa6ce003da2">Willamette Center</option>
+    <option value="01697a14-9ae9-42a7-9868-1cfc93df2dc6">Martha's Village & Kitchen</option>
 </select>
 <p></p>
 <p></p>
@@ -97,19 +50,14 @@
 <script>
     async function initializeTable() {
         const sites = [
-            '1e4e5e20-aece-41e3-b444-bb3f19a73c93',
-            '6018c2ba-ee36-4ac9-9dfb-9df5cd3f6d90',
-            'baec99fb-6c5b-4d10-b755-31a75e1bd7d5',
-            '883fb326-3cb1-4941-9ebb-ac792349d054',
-            '0c143d32-8f50-4a75-a214-9428cb33c89f',
-            '8dc6426f-a2d4-4cbd-a420-88835528f87f',
-            'd7b5c422-d6aa-43ad-9d79-3d6ded34a8fa',
-            '59678093-2bd3-451f-8a40-0aa6ce003da2'
+            '01697a14-9ae9-42a7-9868-1cfc93df2dc6'
         ]
 
         for (let i = 0; i < sites.length; i++) {
             const result = await getbeds(sites[i]);
             const beds = result.available;
+            console.log(result);
+            document.getElementById(sites[i] + '-capacity').innerText = result.capacity;
             document.getElementById(sites[i]).innerText = beds;
             document.getElementById(sites[i] + '-waiting').innerText = result.waiting;
             if (!result.updateTime) {
@@ -129,8 +77,6 @@
     }
     // offical
     const backendUrl = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
-    // test
-    // const backendUrl = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
 
     async function getbeds(location) {
         const response = await fetch(backendUrl + location, {
@@ -143,6 +89,7 @@
         const data = await response.json();
         console.log(data)
         return {
+            capacity: data.capacity,
             available: data.available,
             waiting: data.waiting,
             updateTime: data.updateTime

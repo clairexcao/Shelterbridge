@@ -75,6 +75,13 @@ const MapScreenAndroid = ({ navigation }) => {
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
             });
+        } else if (config.city === 'Palm Springs, CA') {
+            setRegion({
+                latitude: 33.8303,
+                longitude: -116.5456,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            });
         } else if (config.city === 'Coos Bay, OR') {
             setRegion({
                 latitude: 43.3702,

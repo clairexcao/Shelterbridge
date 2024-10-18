@@ -12,6 +12,7 @@ const cities = [
     { name: 'Philadelphia, PA', icon: 'city' },
     { name: 'Seattle, WA', icon: 'city' },
     { name: 'Los Angeles, CA', icon: 'city' },
+    { name: 'Palm Springs, CA', icon: 'beach' },
     { name: 'Charlotte, NC', icon: 'city' },
 ];
 

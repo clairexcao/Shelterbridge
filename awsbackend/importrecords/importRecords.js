@@ -9,8 +9,8 @@ let currentRecord = createNewRecord();
 function createNewRecord() {
     const defaultRecord = {
         id: uuidv4(),
-        category: 'Hotline',
-        city: 'Coos Bay, OR'
+        category: 'Food',
+        city: 'Palm Springs, CA'
     }
     return defaultRecord;
 }
