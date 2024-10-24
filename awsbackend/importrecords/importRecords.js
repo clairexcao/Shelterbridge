@@ -10,7 +10,7 @@ function createNewRecord() {
     const defaultRecord = {
         id: uuidv4(),
         category: 'Food',
-        city: 'Palm Springs, CA'
+        city: 'Seattle, WA'
     }
     return defaultRecord;
 }
@@ -22,13 +22,38 @@ function createNewRecord() {
 // WomenAndChildren
 // Hotline
 
-function readFile(fileName) {
+async function getGeoLocation(address) {
+    const axios = require('axios');
+    const apiKey = 'AIzaSyD8gb4eNZalF6tuXoc29D9_MolYTXWgUCM';
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${apiKey}`;
+    try {
+        const response = await axios.get(url);
+        const location = response.data.results[0].geometry.location;
+        return location;
+    } catch (error) {
+        console.error('Error fetching geolocation:', error);
+    }
+}
+
+async function fillRecordWithGeoLocation(record) {
+    if (record.address) {
+        const location = await getGeoLocation(record.address);
+        record.latitude = location.lat.toString();
+        record.longitude = location.lng.toString();
+    }
+    return record;
+}
+
+async function readFile(fileName) {
     const readInterface = readline.createInterface({
         input: fs.createReadStream(fileName),
         // output: process.stdout,
         console: false
     });
-    readInterface.on('line', function (line) {
+    readInterface.on('line', async function (line) {
+        if (line == '') {
+            return;
+        }
         const match = line.match(/([^:]*):(.*)/);
         if (match) {
             const key = match[1].trim().toLowerCase();
@@ -37,19 +62,22 @@ function readFile(fileName) {
         } else {
             if (currentRecord.name) {
                 records.push(currentRecord);
-                console.log(currentRecord);
-                currentRecord = {};
             }
             currentRecord = createNewRecord();
             currentRecord.name = line;
         }
     });
 
-    readInterface.on('close', function () {
-        records.push(currentRecord);
-        console.log(currentRecord);
+    readInterface.on('close', async function () {
+        if (currentRecord.name) {
+            records.push(currentRecord);
+        }
         console.log(records.length);
         console.log('Finished reading the file.');
+        for (let i = 0; i < records.length; i++) {
+            records[i] = await fillRecordWithGeoLocation(records[i]);
+            console.log(records[i]);
+        }
         writeToFile('./result.txt', records);
     });
 }

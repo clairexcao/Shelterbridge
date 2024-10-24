@@ -23,6 +23,7 @@ async function importItems() {
                 latitude: { N: item.latitude ? (item.latitude) : '0' },
                 longitude: { N: item.longitude ? (item.longitude) : '0' },
                 description: { S: item.description ? item.description : '' },
+                directionslink: { S: item.directionslink ? item.directionslink : '' },
                 city: { S: item.city ? item.city : '' },
             },
         };
