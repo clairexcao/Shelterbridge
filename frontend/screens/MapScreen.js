@@ -87,6 +87,14 @@ const MapScreen = ({ navigation }) => {
                 longitudeDelta: 0.2,
             });
         }
+        else if (config.city === 'Eugene, OR') {
+            setRegion({
+                latitude: 44.0521,
+                longitude: -123.0868,
+                latitudeDelta: 0.30,
+                longitudeDelta: 0.30,
+            });
+        }
         else if (config.city === 'Coos Bay, OR') {
             setRegion({
                 latitude: 43.3702,

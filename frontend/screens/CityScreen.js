@@ -7,8 +7,9 @@ import config from '../config.js';
 
 const cities = [
     { name: 'Portland, OR', icon: 'city' },
-    { name: 'Coos Bay, OR', text: 'Coos-Curry, OR', icon: 'lighthouse' },
-    { name: 'Polk-Marion-Yamhill, OR', icon: 'pine-tree' },
+    { name: 'Polk-Marion-Yamhill, OR', text: 'Salem, OR', icon: 'city' },
+    { name: 'Eugene, OR', icon: 'city' },
+    { name: 'Coos Bay, OR', icon: 'lighthouse' },
     { name: 'Philadelphia, PA', icon: 'city' },
     { name: 'Seattle, WA', icon: 'city' },
     { name: 'Los Angeles, CA', icon: 'city' },

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#b8a9c9', // pastel purple color
-        padding: 15,
+        padding: 10,
         margin: 10,
         borderRadius: 30,
         width: 250
