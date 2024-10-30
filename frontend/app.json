@@ -34,7 +34,7 @@
                 "android.permission.ACCESS_FINE_LOCATION"
             ],
             "package": "com.shelterbridge.androidapp",
-            "versionCode": 9,
+            "versionCode": 10,
             "config": {
                 "googleMaps": {
                     "apiKey": "AIzaSyBfW7FoEla3OsQ4VhdkWgD3wOfmCthN6Ag"
