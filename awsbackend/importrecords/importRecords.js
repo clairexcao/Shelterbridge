@@ -9,7 +9,7 @@ let currentRecord = createNewRecord();
 function createNewRecord() {
     const defaultRecord = {
         id: uuidv4(),
-        category: 'Shelter',
+        category: 'Food',
         city: 'Eugene, OR'
     }
     return defaultRecord;

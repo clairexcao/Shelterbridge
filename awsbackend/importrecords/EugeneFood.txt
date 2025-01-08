@@ -1,0 +1,148 @@
+[
+  {
+    "id": "27b8bb52-fe85-40be-987a-bbc6188fbcb3",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "Coburg Food Pantry",
+    "address": "32695 E Pearl St. Eugene, OR 97408",
+    "phone": "(541) 953-6776",
+    "description": "The Coburg Food Pantry is open from 2 pm to 4 pm on the second and fourth Monday each month. All are welcome.",
+    "latitude": "44.1373065",
+    "longitude": "-123.0653714"
+  },
+  {
+    "id": "57248ada-2f28-4a66-8d80-f90b8ee7baaa",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "Bethel Food Pantry",
+    "address": "4445 Royal Ave Eugene, OR",
+    "phone": "(541) 688-9085",
+    "description": "An inclusive Christian congregation, we welcome and support the LGBTQ community, affirming their full participation in the life of the Church. Bethel UCC is located in Beaverton and serves Portland's West side.",
+    "latitude": "44.0705476",
+    "longitude": "-123.1716353"
+  },
+  {
+    "id": "5e4e8184-bbb9-4a75-a508-fc5250eab18e",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "Pray BiG! Food Pantry",
+    "address": "4110 River Rd Eugene, OR",
+    "phone": "(541) 689-4010",
+    "description": "",
+    "latitude": "44.12272249999999",
+    "longitude": "-123.1410191"
+  },
+  {
+    "id": "3990f99c-9bd7-4810-9b42-7213c82853ba",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "Catholic Community Services (CCS) – Eugene",
+    "address": "1464 W 6th Ave Eugene, OR",
+    "phone": "(541) 345-3628",
+    "latitude": "44.0529901",
+    "longitude": "-123.1148552"
+  },
+  {
+    "id": "bef55715-fd4d-458f-9274-affc7301ea7f",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "Daily Bread",
+    "address": "89780 N Game Farm Rd Eugene, OR",
+    "phone": "(541) 344-3380",
+    "email": "dailybread@mannahouse.church",
+    "description": "Daily Bread provides emergency food items to households that fall within the set financial guidelines and are in our district outlined by Food for Lane County.",
+    "latitude": "44.10144589999999",
+    "longitude": "-123.0578409"
+  },
+  {
+    "id": "ff80f59a-6393-4e15-bcfd-8fa929186c37",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "Faith Center",
+    "address": "1410 W 13th Ave Eugene, OR",
+    "phone": "(541) 686-9244",
+    "email": "twaples4@gmail.com",
+    "website": "https://www.faithcenter.org/foodpantry",
+    "description": "Faith Center partners with FOOD for Lane County as a distribution site open on the second and fourth Thursday of each month* 2:00pm-6:00pm. The Faith Center Food Pantry is open to all Lane County residents who income qualify.",
+    "latitude": "44.04500030000001",
+    "longitude": "-123.1140074"
+  },
+  {
+    "id": "a7b5197e-6108-438e-a124-7ad9048c8f6e",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "Larry Collins Memorial Pantry",
+    "address": "255 Maxwell Rd Eugene, OR",
+    "phone": "(541) 688-2027",
+    "description": "The food pantry serves everyone from low income families, single parents, senior citizens, unemployed individuals, disabled veterans, working poor, and anyone else that comes to the pantry.",
+    "latitude": "44.0909551",
+    "longitude": "-123.129454"
+  },
+  {
+    "id": "cd680f6e-b860-4e9f-a69c-50261a321693",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "Sacred Connections Community Church",
+    "address": "810 W 3rd Ave Eugene, OR",
+    "phone": "(831) 402-5866",
+    "latitude": "44.05633359999999",
+    "longitude": "-123.1051864"
+  },
+  {
+    "id": "52f5ae53-ae0b-435c-8c2f-db9c8f689d63",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "Casa de Luz",
+    "address": "1295 Taney St Eugene, OR",
+    "phone": "(541) 285-3462",
+    "website": "https://www.facebook.com/CasadeLuzOficial/",
+    "latitude": "44.0759791",
+    "longitude": "-123.1601489"
+  },
+  {
+    "id": "54c3ab36-3e73-43c6-b162-f0af2be3731f",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "The Shepherd’s Table at St. John’s",
+    "address": "2537 Game Farm Rd Eugene, OR",
+    "phone": "(541) 746-3322",
+    "website": "https://www.stjohnspringfield.com/the-shepherds-table",
+    "description": "The Shepherd’s Table at St. John’s is a Ministry of Compassion and Caring in partnership with FOOD for Lane County, and hosted by The Episcopal Church of St. John the Divine.",
+    "latitude": "44.0711938",
+    "longitude": "-123.0307301"
+  },
+  {
+    "id": "9266ce67-cf93-4fc6-8f52-13fda1818c92",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "CCS – Springfield",
+    "address": "1025 G Street Springfield, OR",
+    "phone": "(541) 345-3628",
+    "latitude": "44.0520219",
+    "longitude": "-123.0111453"
+  },
+  {
+    "id": "200149dc-f05e-41a2-ad13-8c0aa91d2360",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "Crossfire Hands of Hope",
+    "address": "942 28th St, Springfieldm OR",
+    "phone": "(541) 686-5433",
+    "website": "https://mycrossfire.com/hands-of-hope",
+    "description": "Crossfire Hands Of Hope is a ministry dedicated to reaching out into our community in a tangible way, while showing the love of Jesus Christ to those in need. We do this through the weekly distribution of FREE food boxes and some emergency items. We desire to show people the love of Jesus by helping them meet their needs when they may need it the most. Volunteer opportunities are available on Wednesdays and Thursdays. If you feel led to help us reach those in need, we welcome the blessing you would provide. Our Drive-thru style food box distribution is every Thursday from 12pm - 4pm except for the first Thursday of the month. It is contactless and is for absolutely ANYONE that needs food no matter the income or circumstances! If you need food please come! We are always open regardless of weather.",
+    "latitude": "44.05333539999999",
+    "longitude": "-122.9876098"
+  },
+  {
+    "id": "2f6b5e9c-53c0-443e-9e10-2fe5304576d2",
+    "category": "Food",
+    "city": "Eugene, OR",
+    "name": "The ARC of Lane County",
+    "address": "4181 E St. Springfield, OR",
+    "phone": "(541) 343-5256",
+    "website": "https://getfoodlane.org/",
+    "description": "Arc Lane County, Community Alliance of Lane County, and FOOD for Lane County have put their resources together to form The CARES Center, a local food distribution network. We connect people with pantries in their local area, provide emergency food boxes, and make weekly food deliveries.",
+    "latitude": "44.050492",
+    "longitude": "-122.963848"
+  }
+]

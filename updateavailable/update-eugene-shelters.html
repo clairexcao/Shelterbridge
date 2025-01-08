@@ -1,0 +1,226 @@
+<head></head>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body onload="initializeTable()"></body>
+<h3>Update Eugene Sheleter Available Beds</h3>
+<p>Data source: https://public.tableau.com/app/profile/lchsd/viz/LaneCountyShelterFinder/Summary</p>
+<table style="width:100%">
+    <tr>
+        <th> Shelter Location </th>
+        <th> Available Beds </th>
+        <th> Last Update </th>
+    </tr>
+    <tr>
+        <td>Eugene Mission Rescue Shelter</td>
+        <td id="17e92090-0a77-406e-beae-b8f4c058b897">0</td>
+        <td id="17e92090-0a77-406e-beae-b8f4c058b897-update">-</td>
+    </tr>
+    <tr>
+        <td>Looking Glass Station 7</td>
+        <td id="e7bd04f3-87ec-4671-b883-2bb6b86c113a">0</td>
+        <td id="e7bd04f3-87ec-4671-b883-2bb6b86c113a-update">-</td>
+    </tr>
+    <tr>
+        <td>River Ave Navigation Center</td>
+        <td id="a7ca10e4-fb35-433a-b979-370737ddae42">0</td>
+        <td id="a7ca10e4-fb35-433a-b979-370737ddae42-update">-</td>
+    </tr>
+    <tr>
+        <td>Overnight & Safe Parking Program</td>
+        <td id="2b3a9927-eb57-4036-9ff2-0f45ae812d56">0</td>
+        <td id="2b3a9927-eb57-4036-9ff2-0f45ae812d56-update">-</td>
+    </tr>
+    <tr>
+        <td>Community Supported Shelters - Veterans Safe Spot Community</td>
+        <td id="d7ad0811-14b5-4445-8d9c-8731ab170b34">0</td>
+        <td id="d7ad0811-14b5-4445-8d9c-8731ab170b34-update">-</td>
+    </tr>
+    <tr>
+        <td>Dawn to Dawn (Dusk to Dawn)</td>
+        <td id="9e59fa8f-b86d-4bdc-b439-5249d4a8e66b">0</td>
+        <td id="9e59fa8f-b86d-4bdc-b439-5249d4a8e66b-update">-</td>
+    </tr>
+    <tr>
+        <td>Community Supported Shelters</td>
+        <td id="5146c2cb-f208-4ae4-932c-9fb33b0834d0">0</td>
+        <td id="5146c2cb-f208-4ae4-932c-9fb33b0834d0-update">-</td>
+    </tr>
+    <tr>
+        <td>Village Fields Pallet Shelters</td>
+        <td id="7e2133df-f2d5-4847-8a4e-5dd175f1db8f">0</td>
+        <td id="7e2133df-f2d5-4847-8a4e-5dd175f1db8f-update">-</td>
+    </tr>
+    <tr>
+        <td>310 Garfield Safe Sleep Site</td>
+        <td id="0816bd13-7f22-490c-8ec1-2aa36df2fb25">0</td>
+        <td id="0816bd13-7f22-490c-8ec1-2aa36df2fb25-update">-</td>
+    </tr>
+    <tr>
+        <td>Roosevelt Safe Spot Community</td>
+        <td id="d2e85f2e-35b4-498a-b09e-cf2cf68b0b1d">0</td>
+        <td id="d2e85f2e-35b4-498a-b09e-cf2cf68b0b1d-update">-</td>
+    </tr>
+    <tr>
+        <td>Shankle Brooklyn Street Shelter</td>
+        <td id="16d58fbe-b0cd-4eb3-ace4-033fa938419a">0</td>
+        <td id="16d58fbe-b0cd-4eb3-ace4-033fa938419a-update">-</td>
+    </tr>
+    <tr>
+        <td>410 Garfield St. Safe Sleep Site</td>
+        <td id="444376d7-7a4e-424a-86b8-39ef107f61a6">0</td>
+        <td id="444376d7-7a4e-424a-86b8-39ef107f61a6-update">-</td>
+    </tr>
+    <tr>
+        <td>Everyone Village</td>
+        <td id="4b4d9adf-ad59-4405-b14b-f0fe7390d87a">0</td>
+        <td id="4b4d9adf-ad59-4405-b14b-f0fe7390d87a-update">-</td>
+    </tr>
+    <tr>
+        <td>ALL IN ShelterCare</td>
+        <td id="1a8b5212-794d-4ea0-a48c-52d451f28dcf">0</td>
+        <td id="1a8b5212-794d-4ea0-a48c-52d451f28dcf-update">-</td>
+    </tr>
+    <tr>
+        <td>Looking Glass PEER Shelter</td>
+        <td id="5549e5db-3b45-46d2-b9a7-4a46d96e7924">0</td>
+        <td id="5549e5db-3b45-46d2-b9a7-4a46d96e7924-update">-</td>
+    </tr>
+
+
+</table>
+<p></p>
+
+<label>Please provide secret:</label>
+<input type="password" id="secret" name="secret">
+<p></p>
+
+<label for="location">Select a shelter location:</label>
+<select id="location" name="location" onchange="clearBedsInput()">
+    <option value="17e92090-0a77-406e-beae-b8f4c058b897">Eugene Mission Rescue Shelter</option>
+    <option value="e7bd04f3-87ec-4671-b883-2bb6b86c113a">Looking Glass Station 7</option>
+    <option value="a7ca10e4-fb35-433a-b979-370737ddae42">River Ave Navigation Center</option>
+    <option value="2b3a9927-eb57-4036-9ff2-0f45ae812d56">Overnight & Safe Parking Program</option>
+    <option value="d7ad0811-14b5-4445-8d9c-8731ab170b34">Community Supported Shelters - Veterans Safe Spot Community</option>
+    <option value="9e59fa8f-b86d-4bdc-b439-5249d4a8e66b">Dawn to Dawn (Dusk to Dawn)</option>
+    <option value="5146c2cb-f208-4ae4-932c-9fb33b0834d0">Community Supported Shelters</option>
+    <option value="7e2133df-f2d5-4847-8a4e-5dd175f1db8f">Village Fields Pallet Shelters</option>
+    <option value="0816bd13-7f22-490c-8ec1-2aa36df2fb25">310 Garfield Safe Sleep Site</option>
+    <option value="d2e85f2e-35b4-498a-b09e-cf2cf68b0b1d">Roosevelt Safe Spot Community</option>
+    <option value="16d58fbe-b0cd-4eb3-ace4-033fa938419a">Shankle Brooklyn Street Shelter</option>
+    <option value="444376d7-7a4e-424a-86b8-39ef107f61a6">410 Garfield St. Safe Sleep Site</option>
+    <option value="4b4d9adf-ad59-4405-b14b-f0fe7390d87a">Everyone Village</option>
+    <option value="1a8b5212-794d-4ea0-a48c-52d451f28dcf">ALL IN ShelterCare</option>
+    <option value="5549e5db-3b45-46d2-b9a7-4a46d96e7924">Looking Glass PEER Shelter</option>
+</select>
+<p></p>
+<p></p>
+
+<label for="available">Please update available beds:</label>
+<input type="text" id="available" name="available" placeholder="Enter available beds">
+<p></p>
+<button type="submit" onclick="setBeds()">Submit</button>
+<script>
+    async function initializeTable() {
+        const sites = [
+            '17e92090-0a77-406e-beae-b8f4c058b897',
+            'e7bd04f3-87ec-4671-b883-2bb6b86c113a',
+            'a7ca10e4-fb35-433a-b979-370737ddae42',
+            '2b3a9927-eb57-4036-9ff2-0f45ae812d56',
+            'd7ad0811-14b5-4445-8d9c-8731ab170b34',
+            '9e59fa8f-b86d-4bdc-b439-5249d4a8e66b',
+            '5146c2cb-f208-4ae4-932c-9fb33b0834d0',
+            '7e2133df-f2d5-4847-8a4e-5dd175f1db8f',
+            '0816bd13-7f22-490c-8ec1-2aa36df2fb25',
+            'd2e85f2e-35b4-498a-b09e-cf2cf68b0b1d',
+            '16d58fbe-b0cd-4eb3-ace4-033fa938419a',
+            '444376d7-7a4e-424a-86b8-39ef107f61a6',
+            '4b4d9adf-ad59-4405-b14b-f0fe7390d87a',
+            '1a8b5212-794d-4ea0-a48c-52d451f28dcf',
+            '5549e5db-3b45-46d2-b9a7-4a46d96e7924'
+
+        ]
+
+        for (let i = 0; i < sites.length; i++) {
+            const result = await getbeds(sites[i]);
+            const beds = result.available;
+            console.log(result);
+            document.getElementById(sites[i]).innerText = beds;
+            if (!result.updateTime) {
+                document.getElementById(sites[i] + '-update').innerText = '-';
+            } else {
+                const updateTime = new Date(result.updateTime).toLocaleString();
+                document.getElementById(sites[i] + '-update').innerText = updateTime;
+            }
+        }
+
+        clearBedsInput();
+    }
+    async function clearBedsInput() {
+        const selectedLocation = document.getElementById("location").value;
+        document.getElementById("available").value = document.getElementById(selectedLocation).innerText;
+    }
+    // offical
+    const backendUrl = 'https://eufv359foj.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
+    // test
+    // const backendUrl = 'https://b6nwicd289.execute-api.us-west-2.amazonaws.com/stage/shelter/available/v1/';
+
+    async function getbeds(location) {
+        const response = await fetch(backendUrl + location, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        const data = await response.json();
+        console.log(data)
+        return {
+            capacity: data.capacity,
+            available: data.available,
+            waiting: data.waiting,
+            updateTime: data.updateTime
+        }
+    }
+    function setBeds() {
+        const selectedLocation = document.getElementById("location").value;
+        var available = document.getElementById("available").value;
+        var secret = document.getElementById("secret").value;
+        return fetch(backendUrl + selectedLocation, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': secret
+            },
+            body: JSON.stringify({ available: available, waiting: 0})
+        })
+            .then(response => {
+                console.log('status', response.status);
+                // Handle the response here
+                if (!response.ok) {
+                    console.log('response', response);
+                    throw new Error('Request failed');
+                }
+                document.getElementById(selectedLocation).innerText = available;
+                document.getElementById(selectedLocation + '-update').innerText = new Date().toLocaleString();
+                return response.json();
+            })
+            .then(data => {
+                // Handle the response data here
+                console.log('update success', selectedLocation, available);
+                return data;
+            })
+            .catch(error => {
+                // Handle any errors here
+                alert('Unable to update the information, please check the secret.');
+                console.error('setBeds', error.toString());
+            });
+    }
+</script>
+</body>
